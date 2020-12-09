@@ -11,11 +11,16 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 
+
+
 io.on('connection', (socket) => {
+
     socket.on('chat message', (msg) => {
-        io.emit('chat message', msg);
+        let now = new Date();
+        io.emit('chat message', msg + ' - ' + now.getHours() + ':' + now.getMinutes());
     });
 });
+
 
 
 http.listen(PORT, () => {
