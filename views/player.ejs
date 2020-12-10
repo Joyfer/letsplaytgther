@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+    <div id="player"></div>
+    <button id="play-vid">Play</button>
+    <button id="pause-vid">Pause</button>
+    <form id="url" action=""><input id="n" type="text"></input><button>Load</button></form>
+    <form id="min" action=""><input id="m" type="int"></input><button>Ir</button></form>
+
+    <script>
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('player', {
+    height: '360',
+    width: '640',
+    videoId: "_h82Y-9GMJ8",
+    events: {
+      'playVideo': playVideo,
+      'pauseVideo': pauseVideo,
+      'loadVideoById': loadVideo,
+      'seekTo': seekTo
+    }
+  });
+}
+
+// 4. Play and pause controlls
+function playVideo(event) {
+  player.playVideo();
+}
+
+function pauseVideo(event) {
+  player.pauseVideo();
+}
+
+function loadVideo(url){
+    player.loadVideoById(url, 0)
+}
+
+function seekTo(min){
+    player.seekTo(min)
+}
+
+    </script>
+  </body>
+</html>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    $(function() {
+        var socket = io();
+        $('#url').submit(function(e) {
+            e.preventDefault(); // prevents page reloading
+            let url = $('#n').val();
+            socket.emit('url-player', url);
+            $('#n').val('');
+            return false;
+        });
+        socket.on('url-player', loadVideo)
+    });
+</script>
+
+<script>
+    $(function() {
+        var socket = io();
+        $('#play-vid').click(function(e) {
+            socket.emit('play-player');
+            return false;
+        });
+        socket.on('play-player', playVideo)
+    });
+</script>
+
+<script>
+    $(function() {
+        var socket = io();
+        $('#pause-vid').click(function(e) {
+            socket.emit('pause-player');
+            return false;
+        });
+        socket.on('pause-player', pauseVideo)
+    });
+</script>
+
+<script>
+    $(function() {
+        var socket = io();
+        $('#min').submit(function(e) {
+            e.preventDefault(); // prevents page reloading
+            let min = $('#m').val();
+            socket.emit('min-player', min);
+            $('#m').val('');
+            return false;
+        });
+        socket.on('min-player', seekTo)
+    });
+</script>
