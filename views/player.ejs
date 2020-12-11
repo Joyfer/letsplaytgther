@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html>
-  <body style="background-color: #222;">
+<%- include ('template/cabecera', {tituloweb: 'Inicio EJS'});  %>
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+     <div class="card">
     <div id="player"></div>
     <button id="play-vid">Play</button>
-    <button id="pause-vid">Pause</button>
+    
     <form id="url" action=""><input id="n" type="text"></input><button>Load</button></form>
-    <form id="min" action=""><input id="m" type="int"></input><button>Ir</button></form>
+    <input type="range" class="custom-range" id="customRange1">
+    </div>
 
     <script>
       // 2. This code loads the IFrame Player API code asynchronously.
@@ -26,21 +26,27 @@ function onYouTubeIframeAPIReady() {
     videoId: "_h82Y-9GMJ8",
     events: {
       'playVideo': playVideo,
-      'pauseVideo': pauseVideo,
       'loadVideoById': loadVideo,
-      'seekTo': seekTo
+      'seekTo': seekTo,
+      'onReady': onReady,
     }
   });
 }
 
 // 4. Play and pause controlls
 function playVideo(event) {
-  player.playVideo();
-}
+  let state = player.getPlayerState()
+  if (state == 1){
+    player.pauseVideo();
+    const sourcer = document.getElementById('play-vid');
+    sourcer.innerHTML = "Play"}
+  else {
+    player.playVideo();
+    const sourcer = document.getElementById('play-vid');
+    sourcer.innerHTML = "Pause"}
+  }
 
-function pauseVideo(event) {
-  player.pauseVideo();
-}
+
 
 function loadVideo(url){
     player.loadVideoById(url, 0)
@@ -49,6 +55,13 @@ function loadVideo(url){
 function seekTo(min){
     player.seekTo(min)
 }
+
+function onReady(){
+  let duracion = player.getDuration()
+  const range = document.getElementById('customRange1');
+  let cambio = range.setAttribute("max", duracion)
+}
+
 
     </script>
   </body>
@@ -95,11 +108,9 @@ function seekTo(min){
 <script>
     $(function() {
         var socket = io();
-        $('#min').submit(function(e) {
-            e.preventDefault(); // prevents page reloading
-            let min = $('#m').val();
+        $('#customRange1').click(function(e) {
+            let min = $('#customRange1').val();
             socket.emit('min-player', min);
-            $('#m').val('');
             return false;
         });
         socket.on('min-player', seekTo)
