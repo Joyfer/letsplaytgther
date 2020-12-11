@@ -41,8 +41,8 @@ io.on('connection', (socket) => {
 });
 app.use('/player', require('./router/player'))
 io.on('connection', (socket) => {
-    socket.on('min-player', (min) => {
-        io.emit('min-player', min);
+    socket.on('min-player', (amigo) => {
+        io.emit('min-player', amigo);
     });
 });
 
