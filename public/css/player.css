@@ -1,10 +1,56 @@
-#myProgress {
-    width: 100%;
-    background-color: grey;
-  }
-  
-  #myBar {
-    width: 1%;
-    height: 30px;
-    background-color: green;
-  }
+body{
+  background-color: #222;
+}
+
+.card{
+  background-color: #222;
+  border: none !important;
+  border-radius: 0px !important;
+}
+
+#player{
+  width: 50%;
+  min-width: 360px;
+}
+
+iframe {
+  pointer-events: none;
+}
+
+.progress1{
+  width: 50%;
+  min-width: 360px;
+
+}
+
+ .controles{
+margin-top: 9%;
+border: none;
+width: 50px;
+height: 50px;
+border-radius: 50%;
+}
+
+.play{
+
+border: none;
+width: 80px;
+height: 80px;
+border-radius: 50%
+}
+
+.btn-success:focus{
+box-shadow: none;
+border: none; 
+background-color: none;
+}
+
+.loadia{
+  height: 34px;
+}
+
+.loadua{
+  height: 34px;
+  margin-bottom: 5px;
+  padding: 3px 3px 3px 3px;
+}

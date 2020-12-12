@@ -1,19 +1,29 @@
 <%- include ('template/cabecera', {tituloweb: 'Inicio EJS'});  %>
   <link rel="stylesheet" href="/css/player.css">
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-     <div class="card">
+     <div class="card align-items-center mt-5">
+      <form id="url" action=""><input class="loadia" id="n" type="text" ></input><button class="btn btn-success loadua">GO!</button></form>
     <div id="player"></div>
-    <button id="play-vid">Play</button>
-    
-    <form id="url" action=""><input id="n" type="text" ></input><button>Load</button></form>
-    <div class="progress">
-      <div id="customRange1" class="progress-bar" style="width: 0%;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-    </div>
   
-    <input type="button" id="30segatras" value="30">30</input>
-    </div>
+  <div class="progress1 containter mx-auto"><div class="progress">
+    <div id="customRange1" class="progress-bar bg-success" style="width: 0%;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+  </div></div>
 
-  
+<div class="row mt-4">
+
+  <button class="btn btn-success controles" type="button" id="30segatras" value="atras">←</button>
+
+  <button class="btn btn-success play" id="play-vid">Play</button>
+      
+  <button class="btn btn-success controles" id="30segadelante" value="adelante">→</button>
+  </div>
+ 
+  <div class="row">
+    <button class="btn controles" type="button" id="reiniciar">asdas</button>
+  </div></div> 
+
+
+
     <script>
       // 2. This code loads the IFrame Player API code asynchronously.
       var tag = document.createElement('script');
@@ -60,6 +70,8 @@ function playVideo(event) {
 
 function loadVideo(url){
     player.loadVideoById(url, 0)
+    console.log(url)
+    playVideo(event)
 }
 
 function seekTo(amigo){
@@ -72,6 +84,7 @@ function onReady(){
   range.style.width = '0%';
 }
 
+if(document.hidden = true){
 setInterval( () => {
   let inicio = player.getCurrentTime()
   let duracion = player.getDuration()
@@ -79,7 +92,7 @@ setInterval( () => {
   inicio = inicio / duracion * 100;
   range.style.width = inicio + '%';
 }, 1000)
-
+}
 
     </script>
   </body>
@@ -99,9 +112,7 @@ setInterval( () => {
         });
         socket.on('url-player', loadVideo)
     });
-</script>
 
-<script>
     $(function() {
         var socket = io();
         $('#play-vid').click(function(e) {
@@ -110,18 +121,21 @@ setInterval( () => {
         });
         socket.on('play-player', playVideo)
     });
-</script>
 
-
-<script>
     $(function() {
         var socket = io();
-        $('#30segatras').click(function(e) {
-            let retroceder = $('#30segatras').val();
+        $('.controles').click(function(e) {
+            let segundos = 30;
             let inicio = player.getCurrentTime()
-            let amigo = inicio - retroceder;
+            let evento = e.target.getAttribute('id');
+            if(evento == '30segatras'){
+            var amigo = inicio - segundos;
+            } else if (evento == '30segadelante'){
+            var amigo = inicio + segundos;
+            }else if (evento == 'reiniciar'){
+            var amigo = 0;
+            }
             socket.emit('min-player', amigo);
-            $('#customRange1').val(amigo);
             return false;
         });
         socket.on('min-player', seekTo)

@@ -26,6 +26,11 @@ io.on('connection', (socket) => {
 app.use('/player', require('./router/player'))
 io.on('connection', (socket) => {
     socket.on('url-player', (url) => {
+        var indexurl = url.indexOf("=");
+        if (indexurl == '-1'){
+        indexurl = url.lastIndexOf("/");
+        }
+        url = url.substr(indexurl + 1)
         io.emit('url-player', url);
     });
 });
