@@ -1,8 +1,9 @@
 <%- include ('template/cabecera', {tituloweb: 'Inicio EJS'});  %>
   <link rel="stylesheet" href="/css/player.css">
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-     <div class="card align-items-center mt-5">
-      <form id="url" action=""><input class="loadia" id="n" type="text" ></input><button class="btn btn-success loadua">GO!</button></form>
+     <div class="mt-2 d-none d-sm-none d-md-block"></div>
+      <div class="card align-items-center">
+      <form class="form-inline d-none d-sm-none d-md-block mb-2 bai" id="ola" action=""><input class="form-control loadia1" id="n" type="text" ></input><button type="submit" class="btn btn-success loadua1">GO!</button></form>
     <div id="player"></div>
   
   <div class="progress1 containter mx-auto"><div class="progress">
@@ -19,10 +20,12 @@
   </div>
  
   <div class="row">
-    <button class="btn controles" type="button" id="reiniciar">asdas</button>
+    <button class="btn controles reiniciar2" type="button" id="reiniciar">Start</button><button class="btn controles reiniciar4" type="button" id="syncnow">Sync</button><button class="btn controles reiniciar3" type="button" id="final">End</button>
   </div></div> 
 
-
+  
+  <div class="card align-items-center">
+  <form class="form-inline d-block d-sm-block d-md-none mb-4 mt-4 bai" id="alo" action=""><input class="form-control loadia" id="m" type="text" ></input><button type="submit" class="btn btn-success loadua">GO!</button></form></div>
 
     <script>
       // 2. This code loads the IFrame Player API code asynchronously.
@@ -41,9 +44,9 @@
       var player;
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
-    height: '360',
+    height: '480',
     width: '640',
-    videoId: "_h82Y-9GMJ8",
+    videoId: "EGE_-NfJpAc",
     events: {
       'playVideo': playVideo,
       'loadVideoById': loadVideo,
@@ -75,7 +78,10 @@ function loadVideo(url){
 }
 
 function seekTo(amigo){
-    player.seekTo(amigo)
+    player.seekTo(amigo);
+    player.pauseVideo();
+    const sourcer = document.getElementById('play-vid');
+    sourcer.innerHTML = "Play";
 }
 
 function onReady(){
@@ -103,11 +109,19 @@ setInterval( () => {
 <script>
     $(function() {
         var socket = io();
-        $('#url').submit(function(e) {
+        $('.bai').submit(function(e) {
             e.preventDefault(); // prevents page reloading
-            let url = $('#n').val();
+            let evento = e.target.getAttribute('id');
+            if(evento == 'alo'){
+            var url = $('#m').val();
+            let as = $('#n').val('sds');
+            }else if(evento == 'ola'){
+            var url = $('#n').val();
+            let as = $('#m').val('sds');
+            }           
             socket.emit('url-player', url);
             $('#n').val('');
+            $('#m').val('');
             return false;
         });
         socket.on('url-player', loadVideo)
@@ -125,15 +139,18 @@ setInterval( () => {
     $(function() {
         var socket = io();
         $('.controles').click(function(e) {
-            let segundos = 30;
             let inicio = player.getCurrentTime()
             let evento = e.target.getAttribute('id');
             if(evento == '30segatras'){
-            var amigo = inicio - segundos;
+            var amigo = inicio - 30;
             } else if (evento == '30segadelante'){
-            var amigo = inicio + segundos;
+            var amigo = inicio + 30;
             }else if (evento == 'reiniciar'){
             var amigo = 0;
+            }else if (evento == 'final'){
+            var amigo = player.getDuration() - 1;
+            }else if (evento == 'syncnow'){
+            var amigo = inicio;
             }
             socket.emit('min-player', amigo);
             return false;
