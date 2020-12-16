@@ -14,6 +14,7 @@
 
   <button class="btn btn-success controles" type="button" id="30segatras" value="atras">←</button>
 
+  <button class="btn btn-success play" id="pause-vid">Pause</button>
   <button class="btn btn-success play" id="play-vid">Play</button>
       
   <button class="btn btn-success controles" id="30segadelante" value="adelante">→</button>
@@ -24,7 +25,7 @@
   </div></div> 
 
   
-  <div class="card align-items-center">
+  <div class="card align-items-center mb-4">
   <form class="form-inline d-block d-sm-block d-md-none mb-4 mt-4 bai" id="alo" action=""><input class="form-control loadia" id="m" type="text" ></input><button type="submit" class="btn btn-success loadua">GO!</button></form></div>
 
     <script>
@@ -49,6 +50,7 @@ function onYouTubeIframeAPIReady() {
     videoId: "EGE_-NfJpAc",
     events: {
       'playVideo': playVideo,
+      'pauseVideo': pauseVideo,
       'loadVideoById': loadVideo,
       'seekTo': seekTo,
       'onReady': onReady,
@@ -58,15 +60,11 @@ function onYouTubeIframeAPIReady() {
 
 // 4. Play and pause controlls
 function playVideo(event) {
-  let state = player.getPlayerState()
-  if (state == 1){
-    player.pauseVideo();
-    const sourcer = document.getElementById('play-vid');
-    sourcer.innerHTML = "Play"}
-  else {
     player.playVideo();
-    const sourcer = document.getElementById('play-vid');
-    sourcer.innerHTML = "Pause"}
+  }
+
+function pauseVideo(event) {
+    player.pauseVideo();
   }
 
 
@@ -126,11 +124,17 @@ setInterval( () => {
 
     $(function() {
         var socket = io();
-        $('#play-vid').click(function(e) {
+        $('.play').click(function(e) {
+          let evento = e.target.getAttribute('id');
+          if(evento == 'play-vid'){
             socket.emit('play-player');
+          } else if (evento == 'pause-vid'){
+            socket.emit('pause-player');
+          }
             return false;
         });
         socket.on('play-player', playVideo)
+        socket.on('pause-player', pauseVideo)
     });
 
     $(function() {
