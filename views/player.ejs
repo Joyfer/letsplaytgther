@@ -103,10 +103,8 @@ setInterval( () => {
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
 
-const roomname = window.location.pathname
-const indexroom = roomname.lastIndexOf("/");
-const roomt = roomname.substr(indexroom + 1)
-console.log(roomt)
+
+const roomt = "room1"
 
 var socket = io.connect();
 
