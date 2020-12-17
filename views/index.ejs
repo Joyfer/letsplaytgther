@@ -1,9 +1,28 @@
 <%- include ('template/cabecera', {tituloweb: 'Inicio EJS'});  %>
+<link rel="stylesheet" href="/css/index.css">
 
+<div class="container">
+  <div class="abs-center">
+    <div class="card carta align-items-center">
+      <h1>¡Bienvenid@!</h1>
   <form id="go" action="/player/room2">
-    <input type="text" id="nai">
-    <button type="submit">ASDA</button>
+    <div class="form-group">
+    <label class="label1" for="nai">Nombre de la sala:</label>
+    <input class="form-control texto" type="text" id="nai">
+    <small id="nailHelp" class="form-text text-muted">No se permiten simbolos ni espacios</small>
+    </div>
+    <div class="form-group text-center">
+    <button class="btn btn-success mx-auto" type="submit">Crear sala</button>
+  </div>
   </form>
+</div>
+</div>
+</div>
+
+
+
+
+
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
    $(function() {

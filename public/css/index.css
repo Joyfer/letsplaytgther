@@ -1,0 +1,62 @@
+@font-face {
+    font-family: 'theboldfont';
+    src: url('../fonts/theboldfont.ttf');
+}
+
+@font-face{
+    font-family: 'ViceCitySans';
+    src: url('../fonts/ViceCitySans.otf');
+}
+
+
+body{
+    background: url(../img/index.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+h1{
+    font-family: 'theboldfont';
+}
+.carta{
+    width: 100%;
+    min-width: 600px;
+    max-width: 650px;
+    border-color: none;
+    -webkit-box-shadow: 3px 3px 1px 0px rgba(0, 0, 0, 0.36);
+    -moz-box-shadow:    3px 3px 1px 0px rgba(0, 0, 0, 0.36);
+    box-shadow:         3px 3px 1px 0px rgba(0, 0, 0, 0.36); 
+    -webkit-border-radius: 20px;
+-moz-border-radius: 20px;
+border-radius: 20px;
+margin-bottom: 50px;
+}
+
+form{
+    width: 80%;  
+    font-family: 'ViceCitySans';
+}
+
+label {
+    display: block;
+    text-align: center;
+    line-height: 150%;
+    font-size: 1em;
+}
+
+small{
+    display: block;
+    text-align: center;
+    line-height: 150%;
+    font-size: 0.85em;
+}
+
+
+.abs-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
