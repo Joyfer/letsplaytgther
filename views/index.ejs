@@ -1,6 +1,23 @@
 <%- include ('template/cabecera', {tituloweb: 'Inicio EJS'});  %>
 
-  <h1>Inicio</h1>
+  <form id="go" action="/player/room2">
+    <input type="text" id="nai">
+    <button type="submit">ASDA</button>
+  </form>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+   $(function() {
+        $('#go').submit(function(e) {
+          let cURL= $('#nai').val();// Extract info from data-* attributes
+          cURL = "/player/" + cURL
+          console.log(cURL)
+           $("#go").attr("action", cURL);
+
+                       
+        });})
+
+
+</script>
 
 
     <%- include ('template/footer') %>

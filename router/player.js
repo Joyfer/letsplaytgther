@@ -1,11 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-
-router.get("/", (req, res) => {
+router.get("/:roomt", (req, res) => {
     res.render("player");
 });
-
 
 
 module.exports = router;
