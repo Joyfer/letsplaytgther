@@ -12,52 +12,43 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 
+//   ----------- Chat ----------
+app.use('/chat', require('./router/chat'))
+io.on('connection', (socket) => {
+    socket.on('chat message', (msg) => {
+        let now = new Date();
+        io.emit('chat message', msg + ' - ' + now.getHours() + ':' + now.getMinutes());
+    });
+});
+// ---------- Chat -------------
 
 //   ----------- Video ----------
 app.use('/player', require('./router/player'))
-
-
-
 io.on('connection', (socket) => {
-
-
-    socket.on('join', (roomt) => {
-        socket.join(roomt);
-        console.log("usuario en" + roomt)
-    });
-
-    socket.on('url-player', (url, roomt) => {
+    socket.on('url-player', (url) => {
         var indexurl = url.indexOf("=");
         if (indexurl == '-1'){
         indexurl = url.lastIndexOf("/");
         }
         url = url.substr(indexurl + 1)
-        io.to(roomt).emit('url-player', url);
+        io.emit('url-player', url);
     });
-    
-    socket.on('play-player', (roomt) => {
-        io.to(roomt).emit('play-player');
+});
+io.on('connection', (socket) => {
+    socket.on('play-player', () => {
+        io.emit('play-player');
     });
-
-    socket.on('pause-player', (roomt) => {
-        io.to(roomt).emit('pause-player');
+});
+io.on('connection', (socket) => {
+    socket.on('pause-player', () => {
+        io.emit('pause-player');
     });
-
-    socket.on('min-player', ( roomt, inicio, evento, duration) => {
-        if(evento == '30segatras'){
-            var amigo = inicio - 30;
-            } else if (evento == '30segadelante'){
-            var amigo = inicio + 30;
-            }else if (evento == 'reiniciar'){
-            var amigo = 0;
-            }else if (evento == 'final'){
-            var amigo = duration - 1;
-            }else if (evento == 'syncnow'){
-            var amigo = inicio;
-            }       
-        io.to(roomt).emit('min-player', amigo);
+});
+app.use('/player', require('./router/player'))
+io.on('connection', (socket) => {
+    socket.on('min-player', (amigo) => {
+        io.emit('min-player', amigo);
     });
-    
 });
 
 //   ----------- Video ----------
