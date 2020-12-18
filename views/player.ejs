@@ -1,9 +1,9 @@
-<%- include ('template/cabecera', {tituloweb: 'Inicio EJS'});  %>
+<%- include ('template/cabecera', {tituloweb: 'Player'});  %>
   <link rel="stylesheet" href="/css/player.css">
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
      <div class="mt-2 d-none d-sm-none d-md-block"></div>
       <div class="card align-items-center">
-      <form class="form-inline d-none d-sm-none d-md-block mb-2 bai" id="ola" action=""><input class="form-control loadia1" id="n" type="text" autocomplete="off"></input><button type="submit" class="btn btn-success loadua1">GO!</button></form>
+      <form class="form-inline d-none d-sm-none d-md-block mb-2 bai" id="ola" action=""><input class="form-control loadia1" id="n" type="text" ></input><button type="submit" class="btn btn-success loadua1">GO!</button></form>
     <div id="player"></div>
   
   <div class="progress1 containter mx-auto"><div class="progress">
@@ -12,16 +12,16 @@
 
 <div class="row mt-4">
 
-  <button class="btn btn-success controlesseg" type="button" id="30segatras" value="atras">←</button>
+  <button class="btn btn-success controles controlesseg" type="button" id="30segatras" value="atras">←</button>
 
   <button class="btn btn-success play" id="pause-vid">Pause</button>
   <button class="btn btn-success play" id="play-vid">Play</button>
       
-  <button class="btn btn-success controlesseg" id="30segadelante" value="adelante">→</button>
+  <button class="btn btn-success controles controlesseg" id="30segadelante" value="adelante">→</button>
   </div>
  
   <div class="row">
-    <button class="btn controles reiniciar2" type="button" id="reiniciar">Start</button><button class="btn controles reiniciar4" type="button" id="syncnow">Sync</button><button class="btn controles reiniciar3" type="button" id="final">End</button>
+    <button class="btn controles reiniciar2 controlesseek" type="button" id="reiniciar">Start</button><button class="btn controles reiniciar4 controlesseek" type="button" id="syncnow">Sync</button><button class="btn controles reiniciar3 controlesseek" type="button" id="final">End</button>
   </div></div> 
 
   

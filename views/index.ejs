@@ -1,4 +1,4 @@
-<%- include ('template/cabecera', {tituloweb: 'Inicio EJS'});  %>
+<%- include ('template/cabecera', {tituloweb: 'Inicio'});  %>
 <link rel="stylesheet" href="/css/index.css">
 
 <div class="container">
@@ -28,6 +28,7 @@
    $(function() {
         $('#linki').click(function(e) {
           let cURL= $('#nai').val();// Extract info from data-* attributes
+          cURL = cURL.toLowerCase();
           cURL = "/player/" + cURL
           console.log(cURL)
            $("#linki").attr("href", cURL);              
