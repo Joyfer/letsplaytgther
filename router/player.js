@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-router.get("/:roomt", (req, res) => {
-    res.render("player");
+router.get("/:room", (req, res) => {
+    const roomurl= req.params.room
+    res.render("player", {roomy: roomurl});
 });
 
 

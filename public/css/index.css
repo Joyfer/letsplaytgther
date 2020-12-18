@@ -1,12 +1,14 @@
 @font-face {
-    font-family: 'theboldfont';
-    src: url('../fonts/theboldfont.ttf');
+    font-family: 'JustMyType';
+    src: url('../fonts/JustMyType.otf');
 }
 
 @font-face{
     font-family: 'ViceCitySans';
     src: url('../fonts/ViceCitySans.otf');
 }
+
+
 
 
 body{
@@ -18,11 +20,12 @@ body{
 }
 
 h1{
-    font-family: 'theboldfont';
+    font-family: 'JustMyType';
+    font-size: 75px;
 }
 .carta{
     width: 100%;
-    min-width: 600px;
+    min-width: 200px;
     max-width: 650px;
     border-color: none;
     -webkit-box-shadow: 3px 3px 1px 0px rgba(0, 0, 0, 0.36);
@@ -59,4 +62,49 @@ small{
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+  }
+
+  a.salir  {
+    font-family: "Vice City Sans";
+    background: rgb(138,227,78);
+background: -moz-linear-gradient(180deg, rgba(138,227,78,1) 0%, rgba(80,139,40,1) 100%);
+background: -webkit-linear-gradient(180deg, rgba(138,227,78,1) 0%, rgba(80,139,40,1) 100%);
+background: linear-gradient(180deg, rgba(138,227,78,1) 0%, rgba(80,139,40,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#8ae34e",endColorstr="#508b28",GradientType=1);
+    border: none;
+    color:#ffffff;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    padding: 7px 7px 0;
+    width: 20%;
+    min-width: 135px;
+    max-width: 135px;
+    height: 44px;
+    -webkit-box-shadow: 0 3px 6px 0 rgba(#00000059);
+    box-shadow: 0 3px 4px 0 rgba(#00000059);
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px; 
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  a.salir:hover  {
+    -moz-transform: scale(0.95);
+    -webkit-transform: scale(0.95);
+    -o-transform: scale(0.95);
+    -ms-transform: scale(0.95);
+    transform: scale(0.95);
+
+  }
+  
+ a.salir:active  {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+  -o-transform: scale(1.1);
   }

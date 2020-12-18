@@ -3,7 +3,7 @@
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
      <div class="mt-2 d-none d-sm-none d-md-block"></div>
       <div class="card align-items-center">
-      <form class="form-inline d-none d-sm-none d-md-block mb-2 bai" id="ola" action=""><input class="form-control loadia1" id="n" type="text" ></input><button type="submit" class="btn btn-success loadua1">GO!</button></form>
+      <form class="form-inline d-none d-sm-none d-md-block mb-2 bai" id="ola" action=""><input class="form-control loadia1" id="n" type="text" autocomplete="off"></input><button type="submit" class="btn btn-success loadua1">GO!</button></form>
     <div id="player"></div>
   
   <div class="progress1 containter mx-auto"><div class="progress">
@@ -12,12 +12,12 @@
 
 <div class="row mt-4">
 
-  <button class="btn btn-success controles" type="button" id="30segatras" value="atras">←</button>
+  <button class="btn btn-success controlesseg" type="button" id="30segatras" value="atras">←</button>
 
   <button class="btn btn-success play" id="pause-vid">Pause</button>
   <button class="btn btn-success play" id="play-vid">Play</button>
       
-  <button class="btn btn-success controles" id="30segadelante" value="adelante">→</button>
+  <button class="btn btn-success controlesseg" id="30segadelante" value="adelante">→</button>
   </div>
  
   <div class="row">
@@ -103,10 +103,10 @@ setInterval( () => {
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
 
-const roomname = window.location.pathname
-const indexroom = roomname.lastIndexOf("/");
-const roomt = roomname.substr(indexroom + 1)
-console.log(roomt)
+
+    const roomt = "<%= roomy %>";
+    console.log(roomt); 
+
 
 var socket = io.connect();
 
