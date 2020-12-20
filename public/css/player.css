@@ -17,6 +17,10 @@ body{
   overflow-x:hidden;
 }
 
+h1{
+  margin-left: 3%;
+}
+
 .card{
   background-color: #222;
   border: none !important;
@@ -152,7 +156,7 @@ background-color: none;
 
 
 .ventanaChat{
-  height: 320px;
+  height: 240px;
   margin-top: 5%;
   max-height: 450px;
   -webkit-overflow-scrolling: touch

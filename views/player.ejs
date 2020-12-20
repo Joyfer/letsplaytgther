@@ -32,11 +32,12 @@
 <div class="col-md-12 col-lg-4">
     <div class="mt-5">
       <div class="card chating">
+        <h5 class="card-title"><h1 class="text-white">CHAT</h1></h5>
   <ul id="messages" class="list-group ventanaChat overflow-auto">
   <li class="list-group-item-dark">¡Bienvenid@!</li>
 </ul>
 </div><div class="card text-center chatingFooter align-items-center">
-    <form id="chat" action="" class="chateo">
+    <form id="chat" action="" class="chateo mt-3">
         <input class="form-control chatcontrol" autocomplete="off" value="nick" id="nick" required/><input class="form-control chatcontrol" autocomplete="off" id="m" required/><br><button class="btn chatboton text-white mb-3">Send</button>
     </form></div>
   </div>
@@ -183,7 +184,7 @@ var socket = io.connect();
     $('#chat').submit(function(e) {
                 e.preventDefault(); // prevents page reloading
                 let msg = $('#nick').val() + ': ' + $('#m').val();
-                if (msg.length < 50){
+                if (msg.length < 150){
                 socket.emit('chat message', msg, roomt);
                 }
                 $('#m').val('');
