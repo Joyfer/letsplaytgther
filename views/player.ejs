@@ -2,7 +2,12 @@
   <link rel="stylesheet" href="/css/player.css">
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
      <div class="mt-2 d-none d-sm-none d-md-block"></div>
-      <div class="card align-items-center">
+     <div class="container-md">
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+     <div class="card align-items-center">
+
+
       <form class="form-inline d-none d-sm-none d-md-block mb-2 bai" id="ola" action=""><input class="form-control loadia1" id="n" type="text" ></input><button type="submit" class="btn btn-success loadua1">GO!</button></form>
     <div id="player"></div>
   
@@ -23,10 +28,28 @@
   <div class="row">
     <button class="btn controles reiniciar2 controlesseek" type="button" id="reiniciar">Start</button><button class="btn controles reiniciar4 controlesseek" type="button" id="syncnow">Sync</button><button class="btn controles reiniciar3 controlesseek" type="button" id="final">End</button>
   </div></div> 
+</div> 
+<div class="col-md-12 col-lg-4">
+    <div class="mt-5">
+      <div class="card chating">
+  <ul id="messages" class="list-group ventanaChat overflow-auto">
+  <li class="list-group-item-dark">¡Bienvenid@!</li>
+</ul>
+</div><div class="card text-center chatingFooter align-items-center">
+    <form id="chat" action="" class="chateo">
+        <input class="form-control chatcontrol" autocomplete="off" value="nick" id="nick" required/><input class="form-control chatcontrol" autocomplete="off" id="m" required/><br><button class="btn chatboton text-white mb-3">Send</button>
+    </form></div>
+  </div>
+</div>
+</div>
+</div>
+  
+
+  
 
   
   <div class="card align-items-center mb-4">
-  <form class="form-inline d-block d-sm-block d-md-none mb-4 mt-4 bai" id="alo" action=""><input class="form-control loadia" id="m" type="text" ></input><button type="submit" class="btn btn-success loadua">GO!</button></form></div>
+  <form class="form-inline d-block d-sm-block d-md-none mb-4 mt-4 bai" id="alo" action=""><input class="form-control loadia" id="m" type="text"></input><button type="submit" class="btn btn-success loadua">GO!</button></form></div>
 
     <script>
       // 2. This code loads the IFrame Player API code asynchronously.
@@ -111,7 +134,8 @@ setInterval( () => {
 var socket = io.connect();
 
       socket.emit('join', roomt);
-
+      socket.emit('chat message', '¡Alguien ha entrado a la sala!', roomt)
+      
 
     $(function() {
         $('.bai').submit(function(e) {
@@ -155,6 +179,22 @@ var socket = io.connect();
         });
         socket.on('min-player', seekTo)
     });
+
+    $('#chat').submit(function(e) {
+                e.preventDefault(); // prevents page reloading
+                let msg = $('#nick').val() + ': ' + $('#m').val();
+                if (msg.length < 50){
+                socket.emit('chat message', msg, roomt);
+                }
+                $('#m').val('');
+                return false;
+            });
+
+            socket.on('chat message', function(msg) {
+              $('#messages').append($('<li class="list-group-item">').text(msg))
+              let objDiv = document.getElementById("messages");
+              objDiv.scrollTop = objDiv.scrollHeight;
+            });
 
 
 </script>

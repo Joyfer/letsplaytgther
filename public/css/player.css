@@ -3,10 +3,18 @@
   src: url('../fonts/ViceCitySans.otf');
 }
 
+@media (max-width: 978px) {
+  .container-md {
+    padding:0;
+  }
+
+
+} 
 
 body{
   font-family: 'ViceCitySans';
   background-color: #222;
+  overflow-x:hidden;
 }
 
 .card{
@@ -130,4 +138,61 @@ background-color: none;
 .bai{
   align-items: center;
   text-align: center;
+}
+
+#messages {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#messages li {
+  padding: 5px 10px;
+}
+
+
+.ventanaChat{
+  height: 320px;
+  margin-top: 5%;
+  max-height: 450px;
+  -webkit-overflow-scrolling: touch
+}
+.chateo {
+  bottom: -58px;
+}
+
+.chating{
+  background-color: rgba(0, 0, 0, 0.438);
+}
+
+.chatingFooter{
+  background-color: rgba(0, 0, 0, 0.438);
+  -webkit-border-bottom-right-radius: 7px !important;
+-webkit-border-bottom-left-radius: 7px !important;
+-moz-border-radius-bottomright: 7px !important;
+-moz-border-radius-bottomleft: 7px !important;
+border-bottom-right-radius: 7px !important;
+border-bottom-left-radius: 7px !important;
+}
+
+li{
+  background-color:rgb(26, 26, 26) !important;
+  color: white !important;
+}
+
+.chatboton{
+  background: rgb(138,227,78);
+  background: -moz-linear-gradient(180deg, rgba(138,227,78,1) 0%, rgba(80,139,40,1) 100%);
+  background: -webkit-linear-gradient(180deg, rgba(138,227,78,1) 0%, rgba(80,139,40,1) 100%);
+  background: linear-gradient(180deg, rgba(138,227,78,1) 0%, rgba(80,139,40,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#8ae34e",endColorstr="#508b28",GradientType=1);
+}
+
+.chatboton:focus{
+box-shadow: none;
+}
+
+.chatcontrol:focus{
+  box-shadow: none;
+  border: none;
 }

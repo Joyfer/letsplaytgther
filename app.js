@@ -12,6 +12,7 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 
+app.use('/chat', require('./router/chat'))
 
 //   ----------- Video ----------
 app.use('/player', require('./router/player'))
@@ -56,6 +57,9 @@ io.on('connection', (socket) => {
             var amigo = inicio;
             }       
         io.to(roomt).emit('min-player', amigo);
+    });
+    socket.on('chat message', (msg, roomt) => {
+        io.to(roomt).emit('chat message', msg);
     });
     
 });
