@@ -138,7 +138,7 @@ var socket = io.connect();
       socket.emit('chat message', '¡Alguien ha entrado a la sala!', roomt)
       
 
-    $(function() {
+     
         $('.bai').submit(function(e) {
             e.preventDefault(); // prevents page reloading
             let evento = e.target.getAttribute('id');
@@ -155,9 +155,9 @@ var socket = io.connect();
             return false;
         });
         socket.on('url-player', loadVideo)
-    });
+   
 
-    $(function() {
+   
         $('.play').click(function(e) {
           let evento = e.target.getAttribute('id');
           if(evento == 'play-vid'){
@@ -169,9 +169,9 @@ var socket = io.connect();
         });
         socket.on('play-player', playVideo)
         socket.on('pause-player', pauseVideo)
-    });
+    
 
-    $(function() {
+    
         $('.controles').click(function(e) {
             let inicio = player.getCurrentTime()
             let evento = e.target.getAttribute('id');
@@ -179,8 +179,9 @@ var socket = io.connect();
             socket.emit('min-player', roomt, inicio, evento, duration);
         });
         socket.on('min-player', seekTo)
-    });
+    ;
 
+    
     $('#chat').submit(function(e) {
                 e.preventDefault(); // prevents page reloading
                 let msg = $('#nick').val() + ': ' + $('#m').val();
