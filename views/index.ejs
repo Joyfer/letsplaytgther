@@ -5,16 +5,14 @@
   <div class="abs-center">
     <div class="card carta align-items-center">
       <h1>Bienvenid@</h1>
-  <form action="">
     <div class="form-group">
     <label class="label1" for="nai">Nombre de la sala:</label>
-    <input class="form-control texto" type="text" id="nai" autocomplete="off">
+    <input class="form-control texto" type="text" id="nai" autocomplete="off" onkeypress="irsala()">
     <small id="nailHelp" class="form-text text-muted">No se permiten simbolos ni espacios</small>
     </div>
     <div class="form-group text-center">
     <a id="linki" href="" class="btn btn-success salir">Crear</a>
   </div>
-  </form>
 </div>
 </div>
 </div>
@@ -26,7 +24,7 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
    $(function() {
-        $('#linki').click(function(e) {
+        $('#linki').click(function irsala (e) {
           let cURL= $('#nai').val();// Extract info from data-* attributes
           cURL = cURL.toLowerCase();
           cURL = "/player/" + cURL

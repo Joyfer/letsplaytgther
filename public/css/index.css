@@ -37,8 +37,8 @@ border-radius: 20px;
 margin-bottom: 50px;
 }
 
-form{
-    width: 80%;  
+.form-group{
+    width: 80%;
     font-family: 'ViceCitySans';
 }
 
