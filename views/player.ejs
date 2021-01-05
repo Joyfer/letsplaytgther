@@ -11,9 +11,6 @@
       <form class="form-inline d-none d-sm-none d-md-block mb-2 bai" id="ola" action=""><input class="form-control loadia1" id="n" type="text" ></input><button type="submit" class="btn btn-success loadua1">IR!</button></form>
     <div id="player"></div>
   
-  <div class="progress1 containter mx-auto"><div class="progress">
-    <div id="customRange1" class="progress-bar bg-success" style="width: 0%;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-  </div></div>
 
 <div class="row mt-4">
 
@@ -109,15 +106,6 @@ function onReady(){
   range.style.width = '0%';
 }
 
-if(document.hidden = true){
-setInterval( () => {
-  let inicio = player.getCurrentTime()
-  let duracion = player.getDuration()
-  const range = document.getElementById('customRange1');
-  inicio = inicio / duracion * 100;
-  range.style.width = inicio + '%';
-}, 1000)
-}
 
     </script>
   </body>
