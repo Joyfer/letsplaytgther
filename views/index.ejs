@@ -42,7 +42,7 @@ $(".about").on("click", function () {
   e.preventDefault();
   let sala = document.getElementById("nai").value;
   if (sala != ""){
-  let url = window.location.href + "player/" + sala;
+  let url = "https://letsplaytgther.herokuapp.com/" + "player/" + sala;
   window.location.href = url
   } else {
     alert("Por favor completa el campo")
