@@ -2,194 +2,69 @@
   <link rel="stylesheet" href="/css/player.css">
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
      <div class="mt-2 d-none d-sm-none d-md-block"></div>
-     <div class="container-md">
+     <div class="container">
       <div class="row">
         <div class="col-md-12 col-lg-8">
      <div class="card align-items-center">
-
-
-      <form class="form-inline d-none d-sm-none d-md-block mb-2 bai" id="ola" action=""><input class="form-control loadia1" id="n" type="text" ></input><button type="submit" class="btn btn-success loadua1">IR!</button></form>
+      <form class="form-inline mb-2" id="ola"><input class="form-control" id="n" type="text" autocomplete="off"></input><button type="submit" class ="btn controls loadua1 m-0">IR!</button></form>
     <div id="player"></div>
-  
-
-<div class="row mt-4">
-
-  <button class="btn btn-success controles controlesseg controls" type="button" id="30segatras" value="atras">←</button>
-
-  <button class="btn btn-success controls play" id="pause-vid">Pausa</button>
-  <button class="btn btn-success controls play" id="play-vid">Play</button>
-      
-  <button class="btn btn-success controles controlesseg controls" id="30segadelante" value="adelante">→</button>
+<div class="row mt-2">
+  <button class="btn controls" type="button" id="30segatras" value="atras">←</button>
+  <button class="btn controls" id="pause-vid">Pausa</button>
+  <button class="btn controls" id="play-vid">Play</button>   
+  <button class="btn controls" id="30segadelante" value="adelante">→</button>
   </div>
- 
   <div class="row">
-    <button class="btn controles reiniciar2 controlesseek controls" type="button" id="reiniciar">Inicio</button><button class="btn controles reiniciar4 controlesseek controls" type="button" id="syncnow">Sincro</button><button class="btn controles reiniciar3 controlesseek controls" type="button" id="final">Final</button>
+    <button class="btn controls" type="button" id="reiniciar">Inicio</button><button class="btn controls" type="button" id="syncnow">Sincro</button><button class="btn controls" type="button" id="final">Final</button>
   </div></div> 
 </div> 
 <div class="col-md-12 col-lg-4">
     <div class="mt-5">
       <div class="card chating">
-        <h5 class="card-title"><h1 class="text-white">CHAT</h1></h5>
-  <ul id="messages" class="list-group ventanaChat overflow-auto">
-  <li class="list-group-item-dark">¡Bienvenid@!</li>
+        <h3 class="card-title"><h1 class="text-white">CHAT (<%= roomy %>)</h3>
+  <ul id="messages" class="list-group overflow-auto">
+  <li class="list-group-item-secondary">¡Bienvenid@!</li>
 </ul>
-</div><div class="card text-center chatingFooter align-items-center">
-    <form id="chat" action="" class="chateo mt-3">
-        <input class="form-control chatcontrol" autocomplete="off" value="Alguien" id="nick" required/><input class="form-control chatcontrol" autocomplete="off" id="m" required/><br><button class="btn chatboton text-white mb-3">Enviar</button>
+<div class="card-body text-center">
+    <form id="chat" class="chateo mt-3">
+  <input class="form-control chatcontrol" type="text" autocomplete="off" id="mensajeChat" required/><br><button class="btn controls chatboton text-white mb-1" type="submit">Enviar</button>
     </form></div>
   </div>
 </div>
 </div>
 </div>
-  
-
-  
-
-  
-  <div class="card align-items-center mb-4">
-  <form class="form-inline d-block d-sm-block d-md-none mb-4 mt-4 bai" id="alo" action=""><input class="form-control loadia" id="m" type="text"></input><button type="submit" class="btn btn-success loadua">IR!</button></form></div>
-
-    <script>
-      // 2. This code loads the IFrame Player API code asynchronously.
-      var tag = document.createElement('script');
-      
-
-      tag.src = "https://www.youtube.com/iframe_api";
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-      // 3. This function creates an <iframe> (and YouTube player)
-      //    after the API code downloads.
-
-
-
-      var player;
-function onYouTubeIframeAPIReady() {
-  player = new YT.Player('player', {
-    height: '480',
-    width: '640',
-    videoId: "EGE_-NfJpAc",
-    events: {
-      'playVideo': playVideo,
-      'pauseVideo': pauseVideo,
-      'loadVideoById': loadVideo,
-      'seekTo': seekTo,
-      'onReady': onReady,
-    }
-  });
-}
-
-// 4. Play and pause controlls
-function playVideo(event) {
-    player.playVideo();
-  }
-
-function pauseVideo(event) {
-    player.pauseVideo();
-  }
-
-
-
-function loadVideo(url){
-    player.loadVideoById(url, 0)
-    console.log(url)
-    playVideo(event)
-}
-
-function seekTo(amigo){
-    player.seekTo(amigo);
-}
-
-function onReady(){
-  let duracion = player.getDuration()
-  const range = document.getElementById('customRange1');
-  range.style.width = '0%';
-}
-
-
-    </script>
-  </body>
-</html>
-
+</div>
+<!-- Modal -->
+<div class="modal hide fade" id="myModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <h3 class="modal-title" id="staticBackdropLabel">Sala: <%= roomy %></h3>
+      </div>
+      <div class="modal-body">
+        <p>Usa los botones de abajo, si usas el reproductor puedes desincronizarte con los demás.</p>
+          <div class="form-group">
+            <label for="nombreUsuario">Nombre</label>
+            <input type="text" class="form-control" id="nombreUsuario" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="colorUsuario">Color burbuja</label>
+            <select class="form-control" id="colorUsuario">
+              <option class="list-group-item list-group-item-primary" value="list-group-item-primary">Azul</option>
+              <option class="list-group-item list-group-item-success" value="list-group-item-success">Verde</option>
+              <option class="list-group-item list-group-item-danger" value="list-group-item-danger">Rojo</option>
+              <option class="list-group-item list-group-item-warning" value="list-group-item-warning">Amarillo</option>
+              <option class="list-group-item list-group-item-info" value="list-group-item-info">Cyan</option>
+            </select>
+          </div>
+      </div>
+      <div class="modal-footer border-0">
+        <button id="guardarUsuario" class="btn controls">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script> const roomt = "<%= roomy %>";</script>
 <script src="/socket.io/socket.io.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script>
-
-
-    const roomt = "<%= roomy %>";
-    console.log(roomt); 
-
-
-var socket = io.connect();
-
-      socket.emit('join', roomt);
-      socket.emit('chat message', '¡Alguien ha entrado a la sala!', roomt)
-      
-
-     
-        $('.bai').submit(function(e) {
-            e.preventDefault(); // prevents page reloading
-            let evento = e.target.getAttribute('id');
-            if(evento == 'alo'){
-            var url = $('#m').val();
-            let as = $('#n').val('sds');
-            }else if(evento == 'ola'){
-            var url = $('#n').val();
-            let as = $('#m').val('sds');
-            }           
-            socket.emit('url-player', url, roomt);
-            $('#n').val('');
-            $('#m').val('');
-            return false;
-        });
-        
-   
-
-   
-        $('.controls').click(function(e) {
-          let evento = e.target.getAttribute('id');
-          switch (evento) {
-          case 'play-vid':
-            socket.emit('play-player', roomt);
-          break;
-          case 'pause-vid':
-            socket.emit('pause-player', roomt);         
-          break;
-          case "30segatras":
-          case "30segadelante":
-          case "reiniciar":
-          case "final":
-          case "syncnow":
-            let inicio = player.getCurrentTime()
-            let duration = player.getDuration()
-            socket.emit('min-player', roomt, inicio, evento, duration);
-          break;
-
-            return false;
-        } });
-        
-        socket.on('play-player', playVideo)
-        socket.on('pause-player', pauseVideo)
-        socket.on('min-player', seekTo)
-        socket.on('url-player', loadVideo)
-    ;
-
-    
-    $('#chat').submit(function(e) {
-                e.preventDefault(); // prevents page reloading
-                let msg = $('#nick').val() + ': ' + $('#m').val();
-                if (msg.length < 150){
-                socket.emit('chat message', msg, roomt);
-                }
-                $('#m').val('');
-                return false;
-            });
-
-            socket.on('chat message', function(msg) {
-              $('#messages').append($('<li class="list-group-item">').text(msg))
-              let objDiv = document.getElementById("messages");
-              objDiv.scrollTop = objDiv.scrollHeight;
-            });
-
-
-</script>
+<script src="/player-API/YT-Api.js"></script>
+<script src="/player-API/Player.js"></script>

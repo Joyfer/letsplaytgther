@@ -1,30 +1,32 @@
-@font-face{
-  font-family: 'ViceCitySans';
-  src: url('../fonts/ViceCitySans.otf');
+@font-face {
+  font-family: "PoetsenOne-Regular";
+  src: url("../fonts/PoetsenOne-Regular.ttf");
 }
 
 @media (max-width: 978px) {
   .container-md {
     padding:0;
   }
-
-
 } 
 
 body{
-  font-family: 'ViceCitySans';
-  background-color: #222;
+  font-family: 'PoetsenOne-Regular';
+  background: url(../img/Sky-with-Night-Landscape-Vector.jpg) center no-repeat;
   overflow-x:hidden;
-}
-
-h1{
-  margin-left: 3%;
+  background-size: contain;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .card{
   background-color: #222;
-  border: none !important;
-  border-radius: 0px !important;
+  height: 100%;   
+  padding: 20px;
+  -webkit-box-shadow: 2px 2px 7px 0px rgba(16, 16, 16, 0.45);
+  -moz-box-shadow:    2px 2px 7px 0px rgba(16, 16, 16, 0.45);
+  box-shadow:         2px 2px 7px 0px rgba(16, 16, 16, 0.45);
 }
 
 #player{
@@ -33,171 +35,60 @@ h1{
   max-width: 855px;
 }
 
-
-.progress1{
-  width: 100%;
-  min-width: 360px;
-  max-width: 855px;
+.loadua1{
+  border-radius: 0px 6px 6px 0px;
 }
 
-.controlesseg{
-  background: rgb(138,227,78);
-  background: -moz-linear-gradient(180deg, rgba(138,227,78,1) 0%, rgba(80,139,40,1) 100%);
-  background: -webkit-linear-gradient(180deg, rgba(138,227,78,1) 0%, rgba(80,139,40,1) 100%);
-  background: linear-gradient(180deg, rgba(138,227,78,1) 0%, rgba(80,139,40,1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#8ae34e",endColorstr="#508b28",GradientType=1);
-  
-  margin-top: 9%;
-  border: none;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+#n{
+  color:black;
+  height: 34px;
+  border-radius: 6px 0px 0px 6px;
+  border-color: none;
+  width: 250px;
+  min-width: 20px; 
+}
+
+.controls{
+  width: 75px;
+  height: 34px;
+  color: white;
+  background-color: rgb(64, 146, 194);
+  margin: 2px;
+  padding: 3px 3px 3px 3px;
+  -webkit-box-shadow: 2px 2px 2px 0px rgba(16, 16, 16, 0.27);
+  -moz-box-shadow:    2px 2px 2px 0px rgba(16, 16, 16, 0.27);
+  box-shadow:         2px 2px 2px 0px rgba(16, 16, 16, 0.27);
+}
+
+.controls:hover{
+  box-shadow: none;
+  color: white;
+  background-color: rgb(51, 163, 228);
   }
 
- .controlesseek{
-margin-top: 9%;
-border: none;
-width: 50px;
-height: 50px;
-border-radius: 50%;
-}
-
-.play{
-  background: rgb(138,227,78);
-background: -moz-linear-gradient(180deg, rgba(138,227,78,1) 0%, rgba(80,139,40,1) 100%);
-background: -webkit-linear-gradient(180deg, rgba(138,227,78,1) 0%, rgba(80,139,40,1) 100%);
-background: linear-gradient(180deg, rgba(138,227,78,1) 0%, rgba(80,139,40,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#8ae34e",endColorstr="#508b28",GradientType=1);
-
-border: none;
-width: 80px;
-height: 80px;
-border-radius: 50%
-}
-
-.btn-success:focus{
-box-shadow: none;
-border: none; 
-background-color: none;
-}
-
-.loadia{
-  height: 44px;
-  border-radius: 6px 6px 6px 6px;
-  border-color: none;
-}
-
-.loadua1{
-  background: rgb(138,227,78);
-  background: -moz-linear-gradient(180deg, rgba(138,227,78,1) 0%, rgba(80,139,40,1) 100%);
-  background: -webkit-linear-gradient(180deg, rgba(138,227,78,1) 0%, rgba(80,139,40,1) 100%);
-  background: linear-gradient(180deg, rgba(138,227,78,1) 0%, rgba(80,139,40,1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#8ae34e",endColorstr="#508b28",GradientType=1);
-  height: 34px;
-  padding: 3px 3px 3px 3px;
-  border-radius: 0px 6px 6px 0px;
-  border: none;
-}
-
-.loadia1{
-  height: 34px;
-  border-radius: 6px 0px 0px 6px;
-  border-color: none;
-}
-
-.loadua{
-  background: rgb(138,227,78);
-  background: -moz-linear-gradient(180deg, rgba(138,227,78,1) 0%, rgba(80,139,40,1) 100%);
-  background: -webkit-linear-gradient(180deg, rgba(138,227,78,1) 0%, rgba(80,139,40,1) 100%);
-  background: linear-gradient(180deg, rgba(138,227,78,1) 0%, rgba(80,139,40,1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#8ae34e",endColorstr="#508b28",GradientType=1);
-  width: 30%;
-  height: 44px;
-  padding: 3px 3px 3px 3px;
-  border-radius: 6px 6px 6px 6px;
-  border: none;
-}
-
-.reiniciar2{
-  width: 85px;
-  height: 34px;
-  background-color: white;
-  border-radius: 6px 0px 0px 6px;
-}
-
-.reiniciar3{
-  width: 85px;
-  height: 34px;
-  background-color: white;
-  border-radius: 0px 6px 6px 0px;
-}
-
-.reiniciar4{
-  width: 85px;
-  height: 34px;
-  background-color: white;
-  border-radius: 0px;
-}
- 
-.bai{
-  align-items: center;
-  text-align: center;
-  min-width: 2px;
-}
+.controls:focus{
+  box-shadow: none;
+  }
 
 #messages {
-  list-style-type: none;
   margin: 0;
   padding: 0;
+  height: 200px;
+  margin-top: 5%;
+  -webkit-overflow-scrolling: touch;
 }
 
 #messages li {
   padding: 5px 10px;
+  border: none;
 }
 
-
-.ventanaChat{
-  height: 240px;
-  margin-top: 5%;
-  max-height: 450px;
-  -webkit-overflow-scrolling: touch
-}
-.chateo {
-  bottom: -58px;
+.modal-content{
+  background-color: #222;
+  color: white;
 }
 
-.chating{
-  background-color: rgba(0, 0, 0, 0.438);
-}
-
-.chatingFooter{
-  background-color: rgba(0, 0, 0, 0.438);
-  -webkit-border-bottom-right-radius: 7px !important;
--webkit-border-bottom-left-radius: 7px !important;
--moz-border-radius-bottomright: 7px !important;
--moz-border-radius-bottomleft: 7px !important;
-border-bottom-right-radius: 7px !important;
-border-bottom-left-radius: 7px !important;
-}
-
-li{
-  background-color:rgb(26, 26, 26) !important;
-  color: white !important;
-}
-
-.chatboton{
-  background: rgb(138,227,78);
-  background: -moz-linear-gradient(180deg, rgba(138,227,78,1) 0%, rgba(80,139,40,1) 100%);
-  background: -webkit-linear-gradient(180deg, rgba(138,227,78,1) 0%, rgba(80,139,40,1) 100%);
-  background: linear-gradient(180deg, rgba(138,227,78,1) 0%, rgba(80,139,40,1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#8ae34e",endColorstr="#508b28",GradientType=1);
-}
-
-.chatboton:focus{
-box-shadow: none;
-}
-
-.chatcontrol:focus{
+.form-control:focus{
   box-shadow: none;
   border: none;
 }

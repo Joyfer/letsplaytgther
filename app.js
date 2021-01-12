@@ -24,7 +24,6 @@ io.on('connection', (socket) => {
 
     socket.on('join', (roomt) => {
         socket.join(roomt);
-        console.log("usuario en" + roomt)
     });
 
     socket.on('url-player', (url, roomt) => {
@@ -58,8 +57,9 @@ io.on('connection', (socket) => {
             }       
         io.to(roomt).emit('min-player', amigo);
     });
-    socket.on('chat message', (msg, roomt) => {
-        io.to(roomt).emit('chat message', msg);
+    socket.on('chat message', (msg, color, nombreUsuario, roomt) => {
+        let mensaje = nombreUsuario + ": " + msg;
+        io.to(roomt).emit('chat message', mensaje, color);
     });
     
 });
