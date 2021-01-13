@@ -10,7 +10,7 @@
 
 body {
   color: white;
-  background: url(../img/Sky-with-Night-Landscape-Vector.jpg) center;
+  background: url(../img/Sky-with-Night-Landscape-Vector.jpg) center no-repeat fixed;
   background-size: contain;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -114,4 +114,15 @@ h3{
   -webkit-box-shadow: 2px 2px 2px 0px rgba(16, 16, 16, 0.27);
   -moz-box-shadow: 2px 2px 2px 0px rgba(16, 16, 16, 0.27);
   box-shadow: 2px 2px 2px 0px rgba(16, 16, 16, 0.27);
+}
+
+.alert{
+  position:fixed;
+  top: 20px;
+  width: 300px;
+  height: 50px;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
 }

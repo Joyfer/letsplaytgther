@@ -3,7 +3,11 @@ const router = express.Router();
 
 router.get("/:room", (req, res) => {
     const roomurl= req.params.room
-    res.render("player", {roomy: roomurl});
+    if( roomurl.length < 10 ){      
+        res.render("player", {roomy: roomurl});
+    } else {
+        res.status(404).render("404")
+    }
 });
 
 

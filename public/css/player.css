@@ -92,3 +92,21 @@ body{
   box-shadow: none;
   border: none;
 }
+
+.alert{
+  position:fixed;
+  top: 20px;
+  width: 300px;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  z-index: 999999;
+}
+
+small {
+  display: block;
+  line-height: 150%;
+  font-size: 0.85em;
+  color: rgb(223, 223, 223);
+}

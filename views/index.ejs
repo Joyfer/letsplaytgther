@@ -1,51 +1,56 @@
-<%- include ('template/cabecera', {tituloweb: 'Inicio'});  %>
-<link rel="stylesheet" href="/css/index.css">
+<%- include ('template/cabecera', {tituloweb: 'Inicio'}); %>
+<link rel="stylesheet" href="/css/index.css" />
 <div class="container abs-center">
-    <div class="card align-items-center text-center">
-      <h1>Bienvenid@</h1>
+  <div class="card align-items-center text-center">
+    <h1>Bienvenid@</h1>
     <div class="form-group">
-    <label class="label1" for="nai">Nombre de la sala:</label>
-    <input class="form-control shadow-none border-0" type="text" id="nai" autocomplete="off">
-    <small id="nailHelp" class="form-text">No se permiten simbolos ni espacios</small>
+      <label class="label1" for="nai">Nombre de la sala:</label>
+      <input
+        class="form-control shadow-none border-0"
+        type="text"
+        id="nai"
+        autocomplete="off"
+      />
+      <small id="nailHelp" class="form-text"
+        >No se permiten simbolos, espacios y no más de 10 caracteres</small
+      >
     </div>
     <div class="form-group">
-    <button id="linki" class="btn">Crear</button>
+      <button id="linki" class="btn">Crear</button>
+    </div>
   </div>
+  <button class="btn about">?</button>
 </div>
-<button class="btn about">?</button>
-</div>
-<div class="modal fade" id="aboutModal" data-backdrop="static" data-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="aboutModal"
+  data-backdrop="static"
+  data-keyboard="true"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content text-center">
       <div class="modal-body">
-         <h1>J.R</h1>
-         <p>Creado por:</p>
-         <h3>Joyfer Ramos</h3>
-         <p>Redes sociales:</p>
-         <div>Facebook || Telegram || Página Web</div><br>
-         <p>Tecnologías utilizadas:</p>
-         <p>NodeJS,  Express,  Templates EJS,  Bootstrap 4.5,  websockets</p>
-         <p>Creado con fines didacticos, respetando las políticas de Heroku y Youtube. Espero les guste y puedan hallarle una utilidad :)</p>
-        </div>
+        <h1>J.R</h1>
+        <p>Creado por:</p>
+        <h3>Joyfer Ramos</h3>
+        <p>Redes sociales:</p>
+        <div>Facebook || Telegram || Página Web</div>
+        <br />
+        <p>Tecnologías utilizadas:</p>
+        <p>NodeJS, Express, Templates EJS, Bootstrap 4.5, websockets, vanilla CSS</p>    
+        <p>
+          Creado con fines didacticos, respetando las políticas de Heroku y
+          Youtube. Espero les guste y puedan hallarle una utilidad :)
+        </p>
+      </div>
       <div class="modal-footer border-0 align-items-center">
         <button class="btn" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
-</div>  
-<script>
-$(".about").on("click", function () {
-  $("#aboutModal").modal("show");
-  return;
-});
- document.getElementById('linki').addEventListener('click', function(e) {
-  let sala = document.getElementById("nai").value;
-  if (sala != ""){
-  let url = "https://letsplaytgther.herokuapp.com/" + "player/" + sala;
-  window.location.href = url
-  } else {
-    alert("Por favor completa el campo")
-  } return;
- })
-</script>
-    <%- include ('template/footer') %>
+</div>
+<script src="/player-API/index.js"></script>
+<%- include ('template/footer') %>

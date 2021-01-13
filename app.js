@@ -12,12 +12,15 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 
-app.use('/chat', require('./router/chat'))
+app.use('/chat', require('./router/chat'));
+
 
 //   ----------- Video ----------
-app.use('/player', require('./router/player'))
+app.use('/player', require('./router/player'));
 
-
+app.use(function(req, res, next) {
+    res.status(404).render("404");
+});
 
 io.on('connection', (socket) => {
 

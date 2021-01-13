@@ -1,6 +1,25 @@
 let color = "";
 let nombreUsuario = "";
-
+let roomt = "";
+// Alertas
+function crearAlerta(errorA) {
+  let alertaDiv = document.createElement("div");
+  alertaDiv.classList.add(
+    "alert",
+    "alert-primary",
+    "fade",
+    "show",
+    "text-center"
+  );
+  alertaDiv.setAttribute("role", "alert");
+  let objDiv = document.querySelector("body");
+  alertaDiv.innerHTML = `${errorA}  :(`;
+  objDiv.appendChild(alertaDiv);
+  setTimeout(function () {
+    $('[role="alert"]').alert("close");
+  }, 5000);
+  return (alertaDiv = ""), (objDiv = "");
+}
 // 4. Play and pause controlls
 function playVideo() {
   player.playVideo();
@@ -46,17 +65,17 @@ function urlForm(event) {
   event.preventDefault(); // prevents page reloading
   let url = document.getElementById("n").value;
   socket.emit("url-player", url, roomt);
-  return (document.getElementById("n").value = "");
+  return (document.getElementById("n").value = ""), (url = "");
 }
 function enviarMensaje(event) {
   event.preventDefault(); // prevents page reloading
   let msg = document.getElementById("mensajeChat").value;
   if (msg.length < 150) {
     socket.emit("chat message", msg, color, nombreUsuario, roomt);
+    document.getElementById("mensajeChat").value = "";
   } else {
-    alert("Mensaje muy largo... :(");
+    crearAlerta("Mensaje muy largo");
   }
-  document.getElementById("mensajeChat").value = "";
   return;
 }
 function chatMensajes(msg, color) {
@@ -79,13 +98,30 @@ $(window).on("load", function () {
 });
 $("#guardarUsuario").click(function () {
   nombreUsuario = document.getElementById("nombreUsuario").value;
-  nombreUsuario = nombreUsuario.replace(/\s/g, '');
+  nombreUsuario = nombreUsuario.replace(/\s/g, "");
   color = document.getElementById("colorUsuario").value;
   if (nombreUsuario == "") {
-    alert("Por favor complete los campos");
-  } else {
+    crearAlerta("Completa los campos <3");
+  } else if (
+   ( color == "list-group-item-primary" ||
+    color == "list-group-item-success" ||
+    color == "list-group-item-danger" ||
+    color == "list-group-item-warning" ||
+    color == "list-group-item-info") && (nombreUsuario.length < 10)
+  ) {
+    roomt = salita;
+    socket.emit("join", roomt);
     $("#myModal").modal("hide");
-  }
+    socket.emit(
+      "chat message",
+      "¡Se ha unido a la sala!",
+      "list-group-item-secondary",
+      nombreUsuario,
+      roomt
+    );
+  } else if (nombreUsuario.length >= 10){
+    crearAlerta("Nombre muy largo");
+  } 
   return;
 });
 // Eventos ---------------------------------------------
@@ -95,7 +131,6 @@ for (let el of amor) el.addEventListener("click", controles);
 document.getElementById("chat").addEventListener("submit", enviarMensaje);
 // Sockets ----------------------------------------------
 const socket = io.connect();
-socket.emit("join", roomt);
 socket.on("play-player", playVideo);
 socket.on("pause-player", pauseVideo);
 socket.on("min-player", seekTo);

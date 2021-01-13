@@ -42,10 +42,15 @@
         <h3 class="modal-title" id="staticBackdropLabel">Sala: <%= roomy %></h3>
       </div>
       <div class="modal-body">
-        <p>Usa los botones de abajo, si usas el reproductor puedes desincronizarte con los demás.</p>
+        <p>Usa los botones de abajo, si usas el reproductor puedes desincronizarte con los demás. Espera a que todos 
+          estén dentro para empezar a poner los videos, usa el botón "Sincro" para sincronizar a todos contigo.
+        </p>
           <div class="form-group">
             <label for="nombreUsuario">Nombre</label>
             <input type="text" class="form-control" id="nombreUsuario" autocomplete="off">
+            <small id="nailHelp" class="form-text"
+            >Sin espacios y menos de 10 caracteres.</small
+          >
           </div>
           <div class="form-group">
             <label for="colorUsuario">Color burbuja</label>
@@ -64,7 +69,7 @@
     </div>
   </div>
 </div>
-<script> const roomt = "<%= roomy %>";</script>
+<script> const salita = "<%= roomy %>";</script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/player-API/YT-Api.js"></script>
 <script src="/player-API/Player.js"></script>
