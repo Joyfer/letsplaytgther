@@ -128,7 +128,7 @@ const searchVideoYT = async (videoNombre) => {
   try {
     div.innerHTML = "";
     const resVideo = await axios(
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=7&q=${videoNombre}&type=video&key=${process.env.API}`
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=7&q=${videoNombre}&type=video&key=AIzaSyDob4dB6zKQ1m8CcZGCdvW6JTd3q2YkhTc`
     );
     for await (el of resVideo.data.items) {
       let video = document.createElement("li");
