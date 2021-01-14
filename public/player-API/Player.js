@@ -126,6 +126,11 @@ const div = document.getElementById("lista");
 
 const searchVideoYT = async (videoNombre) => {
   try {
+    if((videoNombre.includes("=")) || (videoNombre.includes("/"))){
+      let urlId = videoNombre
+      socket.emit("url-player", urlId, roomt);
+    }
+    else {
     div.innerHTML = "";
     const resVideo = await axios(
       `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=7&q=${videoNombre}&type=video&key=AIzaSyDob4dB6zKQ1m8CcZGCdvW6JTd3q2YkhTc`
@@ -143,8 +148,10 @@ const searchVideoYT = async (videoNombre) => {
       div.appendChild(video);
       $("#modalSearches").modal("show");
     }
+    }
   } catch (error) {
     console.log(error);
+    crearAlerta("Lo siento, no podemos buscar, pon la url.");
   }
   return;
 };
