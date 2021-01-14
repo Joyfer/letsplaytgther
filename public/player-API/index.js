@@ -20,7 +20,7 @@ function crearAlerta(errorA) {
   let alertaDiv = document.createElement("div");
   alertaDiv.classList.add(
     "alert",
-    "alert-primary",
+    "alert-danger",
     "fade",
     "show",
     "text-center"

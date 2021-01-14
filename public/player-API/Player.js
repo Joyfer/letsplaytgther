@@ -6,7 +6,7 @@ function crearAlerta(errorA) {
   let alertaDiv = document.createElement("div");
   alertaDiv.classList.add(
     "alert",
-    "alert-primary",
+    "alert-danger",
     "fade",
     "show",
     "text-center"
@@ -61,12 +61,7 @@ function controles(e) {
   evento = "";
   return;
 }
-function urlForm(event) {
-  event.preventDefault(); // prevents page reloading
-  let url = document.getElementById("n").value;
-  socket.emit("url-player", url, roomt);
-  return (document.getElementById("n").value = ""), (url = "");
-}
+
 function enviarMensaje(event) {
   event.preventDefault(); // prevents page reloading
   let msg = document.getElementById("mensajeChat").value;
@@ -93,6 +88,7 @@ function chatMensajes(msg, color) {
 }
 // Modal -----------------------------
 $(window).on("load", function () {
+  let modal = document.getElementById("myModal");
   $("#myModal").modal("show");
   return;
 });
@@ -103,11 +99,12 @@ $("#guardarUsuario").click(function () {
   if (nombreUsuario == "") {
     crearAlerta("Completa los campos <3");
   } else if (
-   ( color == "list-group-item-primary" ||
-    color == "list-group-item-success" ||
-    color == "list-group-item-danger" ||
-    color == "list-group-item-warning" ||
-    color == "list-group-item-info") && (nombreUsuario.length < 10)
+    (color == "list-group-item-primary" ||
+      color == "list-group-item-success" ||
+      color == "list-group-item-danger" ||
+      color == "list-group-item-warning" ||
+      color == "list-group-item-info") &&
+    nombreUsuario.length < 10
   ) {
     roomt = salita;
     socket.emit("join", roomt);
@@ -119,13 +116,63 @@ $("#guardarUsuario").click(function () {
       nombreUsuario,
       roomt
     );
-  } else if (nombreUsuario.length >= 10){
+  } else if (nombreUsuario.length >= 10) {
     crearAlerta("Nombre muy largo");
-  } 
+  }
   return;
 });
+// SearchEngine -----------------------------------------
+const div = document.getElementById("lista");
+
+const searchVideoYT = async (videoNombre) => {
+  try {
+    div.innerHTML = "";
+    const resVideo = await axios(
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=7&q=${videoNombre}&type=video&key=${process.env.API}`
+    );
+    for await (el of resVideo.data.items) {
+      let video = document.createElement("li");
+      video.classList.add(
+        "list-group-item",
+        "border-0",
+        "align-items-center",
+        "text-center",
+        "justify-content-center"
+      );
+      video.innerHTML = `<img src="${el.snippet.thumbnails.high.url}"><br><button class="btn btn-warning mt-1" value="${el.id.videoId}">${el.snippet.title}</button><p>Autor: ${el.snippet.channelTitle}</p>`;
+      div.appendChild(video);
+      $("#modalSearches").modal("show");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  return;
+};
+const buscarVideo = (event) => {
+  event.preventDefault();
+  let url = document.getElementById("n").value;
+  searchVideoYT(url);
+  return (document.getElementById("n").value = ""), (url = "");
+};
+div.addEventListener("click", function (e) {
+  if (e.target && e.target.nodeName == "BUTTON") {
+    let urlId = e.target.value;
+    div.innerHTML = "";
+    socket.emit("url-player", urlId, roomt);
+    $("#modalSearches").modal("hide");
+    socket.emit(
+      "chat message",
+      "¡Ha puesto un nuevo video!",
+      "list-group-item-secondary",
+      nombreUsuario,
+      roomt
+    );
+    return (urldId = "");
+  }
+});
+
 // Eventos ---------------------------------------------
-document.getElementById("ola").addEventListener("submit", urlForm);
+document.getElementById("ola").addEventListener("submit", buscarVideo);
 const amor = document.getElementsByClassName("controls");
 for (let el of amor) el.addEventListener("click", controles);
 document.getElementById("chat").addEventListener("submit", enviarMensaje);

@@ -30,11 +30,11 @@ io.on('connection', (socket) => {
     });
 
     socket.on('url-player', (url, roomt) => {
-        var indexurl = url.indexOf("=");
-        if (indexurl == '-1'){
-        indexurl = url.lastIndexOf("/");
-        }
-        url = url.substr(indexurl + 1)
+        // var indexurl = url.indexOf("=");
+        // if (indexurl == '-1'){
+        // indexurl = url.lastIndexOf("/");
+        // }
+        // url = url.substr(indexurl + 1)
         io.to(roomt).emit('url-player', url);
     });
     
