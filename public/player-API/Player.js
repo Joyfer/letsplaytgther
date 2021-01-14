@@ -129,6 +129,13 @@ const searchVideoYT = async (videoNombre) => {
     if((videoNombre.includes("=")) || (videoNombre.includes("/"))){
       let urlId = videoNombre
       socket.emit("url-player", urlId, roomt);
+      socket.emit(
+        "chat message",
+        "¡Ha puesto un nuevo video!",
+        "list-group-item-secondary",
+        nombreUsuario,
+        roomt
+      );
     }
     else {
     div.innerHTML = "";
