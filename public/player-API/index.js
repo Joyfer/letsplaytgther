@@ -7,7 +7,7 @@ document.getElementById("linki").addEventListener("click", function (e) {
   sala = sala.replace(/\s/g, "");
   sala = sala.replace(/[^\w\s]/gi, "");
   if (sala != "" && sala.length < 10) {
-    let url = window.location.href + "player/" + sala;
+    let url = "https://letsplaytgther.herokuapp.com/player/" + sala;
     window.location.href = url;
   } else if (sala.length > 10) {
     crearAlerta("El nombre excede el límite.");
