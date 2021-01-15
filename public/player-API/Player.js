@@ -77,6 +77,9 @@ function chatMensajes(msg, color) {
   let mensaje = document.createElement("li");
   mensaje.classList.add("list-group-item", color);
   let objDiv = document.getElementById("messages");
+  if (objDiv.getElementsByTagName('li').length > 20){
+    objDiv.removeChild(objDiv.childNodes[0]);
+  }
   let d = new Date();
   let hora = d.getHours();
   let minuto = d.getMinutes();
@@ -140,7 +143,7 @@ const searchVideoYT = async (videoNombre) => {
     else {
     div.innerHTML = "";
     const resVideo = await axios(
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=4&q=${videoNombre}&type=video&key=AIzaSyDob4dB6zKQ1m8CcZGCdvW6JTd3q2YkhTc`
+      `https://www.googleapis.com/youtube/v3/search?part=id&maxResults=3&q=${videoNombre}&type=video&fields=items(id(videoId))&key=AIzaSyDob4dB6zKQ1m8CcZGCdvW6JTd3q2YkhTc`
     );
     for await (el of resVideo.data.items) {
       let video = document.createElement("li");
@@ -151,7 +154,7 @@ const searchVideoYT = async (videoNombre) => {
         "text-center",
         "justify-content-center"
       );
-      video.innerHTML = `<img src="${el.snippet.thumbnails.high.url}"><br><button class="btn btn-warning mt-1" value="${el.id.videoId}">${el.snippet.title}</button><p>Autor: ${el.snippet.channelTitle}</p>`;
+      video.innerHTML = `<a href="https://www.youtube.com/watch?v=${el.id.videoId}" target="_blank"><img src="https://i.ytimg.com/vi/${el.id.videoId}/hqdefault.jpg"></a><br><button class="btn btn-warning mt-2" value="${el.id.videoId}">Ver</button>`;
       div.appendChild(video);
       $("#modalSearches").modal("show");
     }
@@ -165,7 +168,10 @@ const searchVideoYT = async (videoNombre) => {
 const buscarVideo = (event) => {
   event.preventDefault();
   let url = document.getElementById("n").value;
-  searchVideoYT(url);
+  if (url == ""){
+    crearAlerta("Por favor coloque algo.")
+  } else {
+  searchVideoYT(url);}
   return (document.getElementById("n").value = ""), (url = "");
 };
 div.addEventListener("click", function (e) {

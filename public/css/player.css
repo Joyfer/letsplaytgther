@@ -110,10 +110,6 @@ small {
   font-size: 0.85em;
   color: rgb(223, 223, 223);
 }
-#modalSearches img{
-  width: 320px;
-  height: 200px;
-}
 #modalSearches li{
 background-color: transparent;
 padding: 3px 3px;

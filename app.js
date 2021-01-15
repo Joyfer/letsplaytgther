@@ -30,13 +30,16 @@ io.on('connection', (socket) => {
     });
 
     socket.on('url-player', (url, roomt) => {
-        let indexurl
-        if (url.includes("=")){
+        let indexurl 
+        let indexurlE
+        if ((url.includes("="))){
              indexurl = url.indexOf("=");
-             url = url.substr(indexurl + 1)
-            } else if (url.includes("/")){
+             indexurlE = url.indexOf("&");
+             url = url.substring((indexurl + 1), (indexurlE))
+            } else if ((url.includes("/"))){
             indexurl = url.lastIndexOf("/");
-            url = url.substr(indexurl + 1)}
+            indexurlE = url.indexOf("&");
+            url = url.substring((indexurl + 1), (indexurlE))}
         io.to(roomt).emit('url-player', url);
     });
     
