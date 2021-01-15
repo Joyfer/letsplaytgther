@@ -34,12 +34,14 @@ io.on('connection', (socket) => {
         let indexurlE
         if ((url.includes("=")) && (url.includes("/"))){
              indexurl = url.indexOf("=");
-             indexurlE = url.indexOf("&");
-             url = url.substring((indexurl + 1), (indexurlE))
-            } else if ((url.includes("/"))){
+             url = url.substring(indexurl + 1)
+             if (url.includes("&")){
+                 indexurlE = url.indexOf("&");
+                 url = url.substring( 0, indexurlE)
+             }
+            } else if  (url.includes("/")){
             indexurl = url.lastIndexOf("/");
-            indexurlE = url.indexOf("&");
-            url = url.substring((indexurl + 1), (indexurlE))}
+            url = url.substring(indexurl + 1)}
         io.to(roomt).emit('url-player', url);
     });
     
