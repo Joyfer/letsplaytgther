@@ -32,7 +32,7 @@ io.on('connection', (socket) => {
     socket.on('url-player', (url, roomt) => {
         let indexurl 
         let indexurlE
-        if ((url.includes("="))){
+        if ((url.includes("=")) && (url.includes("/"))){
              indexurl = url.indexOf("=");
              indexurlE = url.indexOf("&");
              url = url.substring((indexurl + 1), (indexurlE))
