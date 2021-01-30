@@ -1,6 +1,46 @@
-let color = "";
-let nombreUsuario = "";
-let roomt = "";
+class Usuarios {
+  constructor(color, nombreUser, roomt) {
+    this.color = color;
+    this.nombreUser = nombreUser;
+    this.roomt = roomt;
+  }
+}
+let Usuario;
+// Modal -----------------------------
+$(window).on("load", function () {
+  let modal = document.getElementById("myModal");
+  $("#myModal").modal("show");
+  return;
+});
+$("#guardarUsuario").click(function () {
+  let nombreUsuario = document.getElementById("nombreUsuario").value;
+  nombreUsuario = nombreUsuario.replace(/\s/g, "");
+  let color = document.getElementById("colorUsuario").value;
+  if (nombreUsuario == "") {
+    crearAlerta("Completa los campos <3");
+  } else if (
+    (color == "list-group-item-primary" ||
+      color == "list-group-item-success" ||
+      color == "list-group-item-danger" ||
+      color == "list-group-item-warning" ||
+      color == "list-group-item-info") &&
+    nombreUsuario.length < 10
+  ) {
+    Usuario = new Usuarios(color, nombreUsuario, salita);
+    socket.emit("join", Usuario.roomt);
+    $("#myModal").modal("hide");
+    socket.emit(
+      "chat message",
+      "¡Se ha unido a la sala!",
+      "list-group-item-secondary",
+      Usuario.nombreUser,
+      Usuario.roomt
+    );
+  } else if (nombreUsuario.length >= 10) {
+    crearAlerta("Nombre muy largo");
+  }
+  return;
+});
 // Alertas
 function crearAlerta(errorA) {
   let alertaDiv = document.createElement("div");
@@ -43,10 +83,10 @@ function controles(e) {
   let evento = e.target.getAttribute("id");
   switch (evento) {
     case "play-vid":
-      socket.emit("play-player", roomt);
+      socket.emit("play-player", Usuario.roomt);
       break;
     case "pause-vid":
-      socket.emit("pause-player", roomt);
+      socket.emit("pause-player", Usuario.roomt);
       break;
     case "30segatras":
     case "30segadelante":
@@ -55,18 +95,23 @@ function controles(e) {
     case "syncnow":
       let inicio = player.getCurrentTime();
       let duration = player.getDuration();
-      socket.emit("min-player", roomt, inicio, evento, duration);
+      socket.emit("min-player", Usuario.roomt, inicio, evento, duration);
       break;
   }
   evento = "";
   return;
 }
-
 function enviarMensaje(event) {
   event.preventDefault(); // prevents page reloading
   let msg = document.getElementById("mensajeChat").value;
   if (msg.length < 150) {
-    socket.emit("chat message", msg, color, nombreUsuario, roomt);
+    socket.emit(
+      "chat message",
+      msg,
+      Usuario.color,
+      Usuario.nombreUser,
+      Usuario.roomt
+    );
     document.getElementById("mensajeChat").value = "";
   } else {
     crearAlerta("Mensaje muy largo");
@@ -77,7 +122,7 @@ function chatMensajes(msg, color) {
   let mensaje = document.createElement("li");
   mensaje.classList.add("list-group-item", color);
   let objDiv = document.getElementById("messages");
-  if (objDiv.getElementsByTagName('li').length > 20){
+  if (objDiv.getElementsByTagName("li").length > 20) {
     objDiv.removeChild(objDiv.childNodes[0]);
   }
   let d = new Date();
@@ -89,75 +134,34 @@ function chatMensajes(msg, color) {
   objDiv.scrollTop = objDiv.scrollHeight;
   return;
 }
-// Modal -----------------------------
-$(window).on("load", function () {
-  let modal = document.getElementById("myModal");
-  $("#myModal").modal("show");
-  return;
-});
-$("#guardarUsuario").click(function () {
-  nombreUsuario = document.getElementById("nombreUsuario").value;
-  nombreUsuario = nombreUsuario.replace(/\s/g, "");
-  color = document.getElementById("colorUsuario").value;
-  if (nombreUsuario == "") {
-    crearAlerta("Completa los campos <3");
-  } else if (
-    (color == "list-group-item-primary" ||
-      color == "list-group-item-success" ||
-      color == "list-group-item-danger" ||
-      color == "list-group-item-warning" ||
-      color == "list-group-item-info") &&
-    nombreUsuario.length < 10
-  ) {
-    roomt = salita;
-    socket.emit("join", roomt);
-    $("#myModal").modal("hide");
-    socket.emit(
-      "chat message",
-      "¡Se ha unido a la sala!",
-      "list-group-item-secondary",
-      nombreUsuario,
-      roomt
-    );
-  } else if (nombreUsuario.length >= 10) {
-    crearAlerta("Nombre muy largo");
-  }
-  return;
-});
 // SearchEngine -----------------------------------------
 const div = document.getElementById("lista");
-
 const searchVideoYT = async (videoNombre) => {
   try {
-    if((videoNombre.includes("=")) || (videoNombre.includes("/"))){
-      let urlId = videoNombre
-      socket.emit("url-player", urlId, roomt);
-      socket.emit(
-        "chat message",
-        "¡Ha puesto un nuevo video!",
-        "list-group-item-secondary",
-        nombreUsuario,
-        roomt
+    if (videoNombre.includes("=") || videoNombre.includes("/")) {
+      let urlId = videoNombre;
+      socket.emit("url-player", urlId, Usuario.roomt);
+      nuevoVidMsg();
+    } else {
+      div.innerHTML = "";
+      const resVideo = await axios(
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&q=${videoNombre}&type=video&key=AIzaSyDob4dB6zKQ1m8CcZGCdvW6JTd3q2YkhTc`
       );
-    }
-    else {
-    div.innerHTML = "";
-    const resVideo = await axios(
-      `https://www.googleapis.com/youtube/v3/search?part=id&maxResults=3&q=${videoNombre}&type=video&fields=items(id(videoId))&key=AIzaSyDob4dB6zKQ1m8CcZGCdvW6JTd3q2YkhTc`
-    );
-    for await (el of resVideo.data.items) {
-      let video = document.createElement("li");
-      video.classList.add(
-        "list-group-item",
-        "border-0",
-        "align-items-center",
-        "text-center",
-        "justify-content-center"
-      );
-      video.innerHTML = `<a href="https://www.youtube.com/watch?v=${el.id.videoId}" target="_blank"><img src="https://i.ytimg.com/vi/${el.id.videoId}/hqdefault.jpg"></a><br><button class="btn btn-warning mt-2" value="${el.id.videoId}">Ver</button>`;
-      div.appendChild(video);
-      $("#modalSearches").modal("show");
-    }
+      for await (el of resVideo.data.items) {
+        let video = document.createElement("li");
+        video.classList.add(
+          "list-group-item",
+          "border-0",
+          "align-items-center",
+          "text-center",
+          "justify-content-center"
+        );
+        video.innerHTML = `<a href="https://www.youtube.com/watch?v=${el.id.videoId}" target="_blank">
+        <img src="https://i.ytimg.com/vi/${el.id.videoId}/hqdefault.jpg">
+        </a><br><button class="btn btn-warning mt-2" value="${el.id.videoId}">${el.snippet.title}</button><p>${el.snippet.channelTitle}<p>`;
+        div.appendChild(video);
+        $("#modalSearches").modal("show");
+      }
     }
   } catch (error) {
     console.log(error);
@@ -168,29 +172,31 @@ const searchVideoYT = async (videoNombre) => {
 const buscarVideo = (event) => {
   event.preventDefault();
   let url = document.getElementById("n").value;
-  if (url == ""){
-    crearAlerta("Por favor coloque algo.")
+  if (url == "") {
+    crearAlerta("Por favor coloque algo.");
   } else {
-  searchVideoYT(url);}
+    searchVideoYT(url);
+  }
   return (document.getElementById("n").value = ""), (url = "");
 };
 div.addEventListener("click", function (e) {
   if (e.target && e.target.nodeName == "BUTTON") {
     let urlId = e.target.value;
     div.innerHTML = "";
-    socket.emit("url-player", urlId, roomt);
+    socket.emit("url-player", urlId, Usuario.roomt);
     $("#modalSearches").modal("hide");
-    socket.emit(
-      "chat message",
-      "¡Ha puesto un nuevo video!",
-      "list-group-item-secondary",
-      nombreUsuario,
-      roomt
-    );
-    return (urldId = "");
+    nuevoVidMsg();
   }
 });
-
+function nuevoVidMsg(){
+  socket.emit(
+    "chat message",
+    "¡Ha puesto un nuevo video!",
+    "list-group-item-secondary",
+    Usuario.nombreUser,
+    Usuario.roomt);
+    return (urldId = "")
+}
 // Eventos ---------------------------------------------
 document.getElementById("ola").addEventListener("submit", buscarVideo);
 const amor = document.getElementsByClassName("controls");
