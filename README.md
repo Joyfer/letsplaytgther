@@ -1,5 +1,5 @@
 # letsplaytgther
-Aplicación para ver videos online con otras personas usando NodeJS, templates ejs y websockets.
+Application to watch online videos with other people using NodeJS, templates ejs and websockets
 
-#YoutubeAPI
-Creado usando Youtube Player API y Youtube Search List API.
+#YoutubeAPI's
+Built with Youtube Player API and Youtube Search List API.
