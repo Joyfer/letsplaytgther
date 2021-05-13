@@ -5,14 +5,14 @@
 
 @media (max-width: 978px) {
   .container-md {
-    padding:0;
+    padding: 0;
   }
-} 
+}
 
-body{
-  font-family: 'PoetsenOne-Regular';
+body {
+  font-family: "PoetsenOne-Regular";
   background: url(../img/Sky-with-Night-Landscape-Vector.jpg) center no-repeat;
-  overflow-x:hidden;
+  overflow-x: hidden;
   background-size: contain;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -20,35 +20,35 @@ body{
   background-size: cover;
 }
 
-.card{
+.card {
   background-color: #222;
-  height: 100%;   
+  height: 100%;
   padding: 20px;
   -webkit-box-shadow: 2px 2px 7px 0px rgba(16, 16, 16, 0.45);
-  -moz-box-shadow:    2px 2px 7px 0px rgba(16, 16, 16, 0.45);
-  box-shadow:         2px 2px 7px 0px rgba(16, 16, 16, 0.45);
+  -moz-box-shadow: 2px 2px 7px 0px rgba(16, 16, 16, 0.45);
+  box-shadow: 2px 2px 7px 0px rgba(16, 16, 16, 0.45);
 }
 
-#player{
+#player {
   width: 100%;
   min-width: 360px;
   max-width: 855px;
 }
 
-.loadua1{
+.loadua1 {
   border-radius: 0px 6px 6px 0px;
 }
 
-#n{
-  color:black;
+#n {
+  color: black;
   height: 34px;
   border-radius: 6px 0px 0px 6px;
   border-color: none;
   width: 250px;
-  min-width: 20px; 
+  min-width: 20px;
 }
 
-.controls{
+.controls {
   width: 75px;
   height: 34px;
   color: white;
@@ -56,19 +56,19 @@ body{
   margin: 2px;
   padding: 3px 3px 3px 3px;
   -webkit-box-shadow: 2px 2px 2px 0px rgba(16, 16, 16, 0.27);
-  -moz-box-shadow:    2px 2px 2px 0px rgba(16, 16, 16, 0.27);
-  box-shadow:         2px 2px 2px 0px rgba(16, 16, 16, 0.27);
+  -moz-box-shadow: 2px 2px 2px 0px rgba(16, 16, 16, 0.27);
+  box-shadow: 2px 2px 2px 0px rgba(16, 16, 16, 0.27);
 }
 
-.controls:hover{
+.controls:hover {
   box-shadow: none;
   color: white;
   background-color: rgb(51, 163, 228);
-  }
+}
 
-.controls:focus{
+.controls:focus {
   box-shadow: none;
-  }
+}
 
 #messages {
   margin: 0;
@@ -83,18 +83,18 @@ body{
   border: none;
 }
 
-.modal-content{
+.modal-content {
   background-color: #222;
   color: white;
 }
 
-.form-control:focus{
+.form-control:focus {
   box-shadow: none;
   border: none;
 }
 
-.alert{
-  position:fixed;
+.alert {
+  position: fixed;
   top: 20px;
   width: 300px;
   right: 0;
@@ -110,8 +110,16 @@ small {
   font-size: 0.85em;
   color: rgb(223, 223, 223);
 }
-#modalSearches li{
-background-color: transparent;
-padding: 3px 3px;
-margin-top: 40px;
+#modalSearches li {
+  background-color: transparent;
+  padding: 3px 3px;
+  margin-top: 40px;
+}
+#modalSearches li:hover {
+  background-color: rgba(255, 255, 255, 0.233);
+  border: solid 2px white;
+}
+#modalSearches li:active {
+  background-color: rgba(255, 255, 255, 0.384);
+  border: solid 2px white;
 }

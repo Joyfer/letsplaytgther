@@ -134,7 +134,7 @@ function chatMensajes(msg, color) {
   objDiv.scrollTop = objDiv.scrollHeight;
   return;
 }
-// SearchEngine -----------------------------------------
+// Buscador de Youtube -----------------------------------------
 const div = document.getElementById("lista");
 const searchVideoYT = async (videoNombre) => {
   try {
@@ -156,9 +156,9 @@ const searchVideoYT = async (videoNombre) => {
           "text-center",
           "justify-content-center"
         );
-        video.innerHTML = `<a href="https://www.youtube.com/watch?v=${el.id.videoId}" target="_blank">
+        video.innerHTML = `
         <img src="https://i.ytimg.com/vi/${el.id.videoId}/hqdefault.jpg">
-        </a><br><button class="btn btn-warning mt-2" value="${el.id.videoId}">${el.snippet.title}</button><p>${el.snippet.channelTitle}<p>`;
+        <br><button class="btn btn-warning mt-2" value="${el.id.videoId}">${el.snippet.title}</button><p>${el.snippet.channelTitle}<p>`;
         div.appendChild(video);
         $("#modalSearches").modal("show");
       }
@@ -188,14 +188,15 @@ div.addEventListener("click", function (e) {
     nuevoVidMsg();
   }
 });
-function nuevoVidMsg(){
+function nuevoVidMsg() {
   socket.emit(
     "chat message",
     "¡Ha puesto un nuevo video!",
     "list-group-item-secondary",
     Usuario.nombreUser,
-    Usuario.roomt);
-    return (urldId = "")
+    Usuario.roomt
+  );
+  return (urldId = "");
 }
 // Eventos ---------------------------------------------
 document.getElementById("ola").addEventListener("submit", buscarVideo);
