@@ -190,18 +190,15 @@ function nuevoVidMsg() {
   );
   return;
 }
-function PonerVideoYoutube(e, value) {
+function PonerVideoYoutube(value) {
     let urlId = value
     div.innerHTML = "";
-    console.log(urlId)
+    console.log(value)
     socket.emit("url-player", urlId, Usuario.roomt);
     $("#modalSearches").modal("hide");
     nuevoVidMsg();
 }
 // Eventos ---------------------------------------------
-// Poner video de lista de Youtube ------------
-div.addEventListener("click", PonerVideoYoutube);
-// ---------------------------------------------------
 document.getElementById("ola").addEventListener("submit", buscarVideo);
 const amor = document.getElementsByClassName("controls");
 for (let el of amor) el.addEventListener("click", controles);
