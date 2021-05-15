@@ -156,10 +156,10 @@ const searchVideoYT = async (videoNombre) => {
           "justify-content-center"
         );
         video.setAttribute("role", "button");
-        video.setAttribute("onclick", `PonerVideoYoutube(${el.id.videoId})`);
+        video.setAttribute("onclick", `PonerVideoYoutube("${el.id.videoId}")`);
         video.innerHTML = `
         <img src="https://i.ytimg.com/vi/${el.id.videoId}/hqdefault.jpg">
-        <br><button class="btn btn-warning mt-2" onclick="PonerVideoYoutube(${el.id.videoId})">${el.snippet.title}</button><p>${el.snippet.channelTitle}<p>`;
+        <br><button class="btn btn-warning mt-2" onclick="PonerVideoYoutube("${el.id.videoId}")">${el.snippet.title}</button><p>${el.snippet.channelTitle}<p>`;
         div.appendChild(video);
         $("#modalSearches").modal("show");
       }
