@@ -158,7 +158,7 @@ const searchVideoYT = async (videoNombre) => {
         video.setAttribute("role", "button");
         video.setAttribute("onclick", `PonerVideoYoutube("${el.id.videoId}")`);
         video.innerHTML = `
-        <img src="https://i.ytimg.com/vi/${el.id.videoId}/hqdefault.jpg">
+        <img src="https://i.ytimg.com/vi/${el.id.videoId}/hqdefault.jpg" class="img-fluid">
         <br><button class="btn btn-warning mt-2">${el.snippet.title}</button><p>${el.snippet.channelTitle}<p>`;
         div.appendChild(video);
         $("#modalSearches").modal("show");
@@ -193,6 +193,7 @@ function nuevoVidMsg() {
 function PonerVideoYoutube(e, value) {
     let urlId = value
     div.innerHTML = "";
+    console.log(urlId)
     socket.emit("url-player", urlId, Usuario.roomt);
     $("#modalSearches").modal("hide");
     nuevoVidMsg();
