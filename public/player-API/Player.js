@@ -151,14 +151,15 @@ const searchVideoYT = async (videoNombre) => {
         let video = document.createElement("li");
         video.classList.add(
           "list-group-item",
-          "border-0",
           "align-items-center",
           "text-center",
           "justify-content-center"
         );
+        video.setAttribute("role", "button");
+        video.setAttribute("onclick", `PonerVideoYoutube(${el.id.videoId})`);
         video.innerHTML = `
         <img src="https://i.ytimg.com/vi/${el.id.videoId}/hqdefault.jpg">
-        <br><button class="btn btn-warning mt-2" value="${el.id.videoId}">${el.snippet.title}</button><p>${el.snippet.channelTitle}<p>`;
+        <br><button class="btn btn-warning mt-2" onclick="PonerVideoYoutube(${el.id.videoId})">${el.snippet.title}</button><p>${el.snippet.channelTitle}<p>`;
         div.appendChild(video);
         $("#modalSearches").modal("show");
       }
@@ -179,15 +180,6 @@ const buscarVideo = (event) => {
   }
   return (document.getElementById("n").value = ""), (url = "");
 };
-div.addEventListener("click", function (e) {
-  if (e.target && e.target.nodeName == "BUTTON") {
-    let urlId = e.target.value;
-    div.innerHTML = "";
-    socket.emit("url-player", urlId, Usuario.roomt);
-    $("#modalSearches").modal("hide");
-    nuevoVidMsg();
-  }
-});
 function nuevoVidMsg() {
   socket.emit(
     "chat message",
@@ -196,9 +188,19 @@ function nuevoVidMsg() {
     Usuario.nombreUser,
     Usuario.roomt
   );
-  return (urldId = "");
+  return;
+}
+function PonerVideoYoutube(e, value) {
+    let urlId = value
+    div.innerHTML = "";
+    socket.emit("url-player", urlId, Usuario.roomt);
+    $("#modalSearches").modal("hide");
+    nuevoVidMsg();
 }
 // Eventos ---------------------------------------------
+// Poner video de lista de Youtube ------------
+div.addEventListener("click", PonerVideoYoutube);
+// ---------------------------------------------------
 document.getElementById("ola").addEventListener("submit", buscarVideo);
 const amor = document.getElementsByClassName("controls");
 for (let el of amor) el.addEventListener("click", controles);
