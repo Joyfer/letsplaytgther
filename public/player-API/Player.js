@@ -6,8 +6,10 @@ class Usuarios {
   }
 }
 let Usuario;
+const socket = io();
 // Conect function
-function conect(text) {
+function connect(text) {
+  socket.connect();
   socket.emit("join", Usuario.roomt);
   $("#myModal").modal("hide");
   socket.emit(
@@ -18,6 +20,12 @@ function conect(text) {
     Usuario.roomt
   );
 }
+socket.on("disconnect", (reason) => {
+  if (reason === "io server disconnect" || reason === "io client disconnect") {
+    // the disconnection was initiated by the server, you need to reconnect manually
+    connect("Se ha reconectado")
+  }
+});
 // Modal -----------------------------
 $(window).on("load", function () {
   let modal = document.getElementById("myModal");
@@ -40,7 +48,7 @@ $("#guardarUsuario").click(function () {
   ) {
     Usuario = new Usuarios(color, nombreUsuario, salita);
     $("#myModal").modal("hide");
-    conect("Se ha conectado");
+    connect("Se ha conectado");
   } else if (nombreUsuario.length >= 10) {
     crearAlerta("Nombre muy largo");
   }
@@ -110,16 +118,13 @@ function enviarMensaje(event) {
   event.preventDefault(); // prevents page reloading
   let msg = document.getElementById("mensajeChat").value;
   if (msg.length < 150) {
-    // Si está desconectado, reconecta.
-    socket.connected
-      ? socket.emit(
-          "chat message",
-          msg,
-          Usuario.color,
-          Usuario.nombreUser,
-          Usuario.roomt
-        )
-      : conect("Se ha reconectado");
+    socket.emit(
+      "chat message",
+      msg,
+      Usuario.color,
+      Usuario.nombreUser,
+      Usuario.roomt
+    );
     document.getElementById("mensajeChat").value = "";
   } else {
     crearAlerta("Mensaje muy largo");
@@ -214,10 +219,9 @@ const amor = document.getElementsByClassName("controls");
 for (let el of amor) el.addEventListener("click", controles);
 document.getElementById("chat").addEventListener("submit", enviarMensaje);
 document.getElementById("reconect").addEventListener("click", () => {
-  conect("Se ha reconectado");
+  connect("Se ha reconectado");
 });
 // Sockets ----------------------------------------------
-const socket = io.connect();
 socket.on("play-player", playVideo);
 socket.on("pause-player", pauseVideo);
 socket.on("min-player", seekTo);
