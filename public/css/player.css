@@ -54,7 +54,7 @@ body {
   color: white;
   background-color: rgb(64, 146, 194);
   margin: 2px;
-  padding: 3px 3px 3px 3px;
+  padding: 3px;
   -webkit-box-shadow: 2px 2px 2px 0px rgba(16, 16, 16, 0.27);
   -moz-box-shadow: 2px 2px 2px 0px rgba(16, 16, 16, 0.27);
   box-shadow: 2px 2px 2px 0px rgba(16, 16, 16, 0.27);

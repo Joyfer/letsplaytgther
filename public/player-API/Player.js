@@ -27,15 +27,8 @@ $("#guardarUsuario").click(function () {
     nombreUsuario.length < 10
   ) {
     Usuario = new Usuarios(color, nombreUsuario, salita);
-    socket.emit("join", Usuario.roomt);
     $("#myModal").modal("hide");
-    socket.emit(
-      "chat message",
-      "¡Se ha unido a la sala!",
-      "list-group-item-secondary",
-      Usuario.nombreUser,
-      Usuario.roomt
-    );
+    conect("Se ha reconectado")
   } else if (nombreUsuario.length >= 10) {
     crearAlerta("Nombre muy largo");
   }
@@ -60,7 +53,19 @@ function crearAlerta(errorA) {
   }, 5000);
   return (alertaDiv = ""), (objDiv = "");
 }
-// 4. Play and pause controlls
+// Conect function
+function conect(text) {
+  socket.emit("join", Usuario.roomt);
+  $("#myModal").modal("hide");
+  socket.emit(
+    "chat message",
+    `${text}`,
+    "list-group-item-secondary",
+    Usuario.nombreUser,
+    Usuario.roomt
+  );
+}
+// Play and pause controlls
 function playVideo() {
   player.playVideo();
   return;
@@ -105,6 +110,7 @@ function enviarMensaje(event) {
   event.preventDefault(); // prevents page reloading
   let msg = document.getElementById("mensajeChat").value;
   if (msg.length < 150) {
+    socket.connected ? {} : conect("Reconectado");
     socket.emit(
       "chat message",
       msg,
@@ -193,16 +199,19 @@ function nuevoVidMsg() {
 function PonerVideoYoutube(value) {
     let urlId = value
     div.innerHTML = "";
-    console.log(value)
     socket.emit("url-player", urlId, Usuario.roomt);
     $("#modalSearches").modal("hide");
     nuevoVidMsg();
 }
 // Eventos ---------------------------------------------
+// Poner video de lista de Youtube ------------
+div.addEventListener("click", PonerVideoYoutube);
+// ---------------------------------------------------
 document.getElementById("ola").addEventListener("submit", buscarVideo);
 const amor = document.getElementsByClassName("controls");
 for (let el of amor) el.addEventListener("click", controles);
 document.getElementById("chat").addEventListener("submit", enviarMensaje);
+document.getElementById("reconect").addEventListener("click", () => {conect("Se ha reconectado")});
 // Sockets ----------------------------------------------
 const socket = io.connect();
 socket.on("play-player", playVideo);
