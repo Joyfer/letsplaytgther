@@ -40,7 +40,7 @@ $("#guardarUsuario").click(function () {
   ) {
     Usuario = new Usuarios(color, nombreUsuario, salita);
     $("#myModal").modal("hide");
-    conect("Se ha conectado")
+    conect("Se ha conectado");
   } else if (nombreUsuario.length >= 10) {
     crearAlerta("Nombre muy largo");
   }
@@ -110,14 +110,16 @@ function enviarMensaje(event) {
   event.preventDefault(); // prevents page reloading
   let msg = document.getElementById("mensajeChat").value;
   if (msg.length < 150) {
-    if(!socket.connected) conect("Reconectado");
-    socket.emit(
-      "chat message",
-      msg,
-      Usuario.color,
-      Usuario.nombreUser,
-      Usuario.roomt
-    );
+    // Si está desconectado, reconecta.
+    socket.connected
+      ? socket.emit(
+          "chat message",
+          msg,
+          Usuario.color,
+          Usuario.nombreUser,
+          Usuario.roomt
+        )
+      : conect("Se ha reconectado");
     document.getElementById("mensajeChat").value = "";
   } else {
     crearAlerta("Mensaje muy largo");
@@ -197,11 +199,11 @@ function nuevoVidMsg() {
   return;
 }
 function PonerVideoYoutube(value) {
-    let urlId = value
-    div.innerHTML = "";
-    socket.emit("url-player", urlId, Usuario.roomt);
-    $("#modalSearches").modal("hide");
-    nuevoVidMsg();
+  let urlId = value;
+  div.innerHTML = "";
+  socket.emit("url-player", urlId, Usuario.roomt);
+  $("#modalSearches").modal("hide");
+  nuevoVidMsg();
 }
 // Eventos ---------------------------------------------
 // Poner video de lista de Youtube ------------
@@ -211,7 +213,9 @@ document.getElementById("ola").addEventListener("submit", buscarVideo);
 const amor = document.getElementsByClassName("controls");
 for (let el of amor) el.addEventListener("click", controles);
 document.getElementById("chat").addEventListener("submit", enviarMensaje);
-document.getElementById("reconect").addEventListener("click", () => {conect("Se ha reconectado")});
+document.getElementById("reconect").addEventListener("click", () => {
+  conect("Se ha reconectado");
+});
 // Sockets ----------------------------------------------
 const socket = io.connect();
 socket.on("play-player", playVideo);
