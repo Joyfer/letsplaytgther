@@ -6,6 +6,18 @@ class Usuarios {
   }
 }
 let Usuario;
+// Conect function
+function conect(text) {
+  socket.emit("join", Usuario.roomt);
+  $("#myModal").modal("hide");
+  socket.emit(
+    "chat message",
+    `${text}`,
+    "list-group-item-secondary",
+    Usuario.nombreUser,
+    Usuario.roomt
+  );
+}
 // Modal -----------------------------
 $(window).on("load", function () {
   let modal = document.getElementById("myModal");
@@ -28,7 +40,7 @@ $("#guardarUsuario").click(function () {
   ) {
     Usuario = new Usuarios(color, nombreUsuario, salita);
     $("#myModal").modal("hide");
-    conect("Se ha reconectado")
+    conect("Se ha conectado")
   } else if (nombreUsuario.length >= 10) {
     crearAlerta("Nombre muy largo");
   }
@@ -52,18 +64,6 @@ function crearAlerta(errorA) {
     $('[role="alert"]').alert("close");
   }, 5000);
   return (alertaDiv = ""), (objDiv = "");
-}
-// Conect function
-function conect(text) {
-  socket.emit("join", Usuario.roomt);
-  $("#myModal").modal("hide");
-  socket.emit(
-    "chat message",
-    `${text}`,
-    "list-group-item-secondary",
-    Usuario.nombreUser,
-    Usuario.roomt
-  );
 }
 // Play and pause controlls
 function playVideo() {
@@ -110,7 +110,7 @@ function enviarMensaje(event) {
   event.preventDefault(); // prevents page reloading
   let msg = document.getElementById("mensajeChat").value;
   if (msg.length < 150) {
-    socket.connected ? {} : conect("Reconectado");
+    if(!socket.connected) conect("Reconectado");
     socket.emit(
       "chat message",
       msg,
