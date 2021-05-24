@@ -1,0 +1,76 @@
+<!-- Modal -->
+<div
+  class="modal hide fade"
+  id="myModal"
+  data-backdrop="static"
+  data-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <h3 class="modal-title" id="staticBackdropLabel">Sala: <%= roomy %></h3>
+      </div>
+      <div class="modal-body">
+        <p>
+          Usa los botones de abajo, si usas el reproductor puedes
+          desincronizarte con los demás. Espera a que todos estén dentro para
+          empezar a poner los videos. El botón "Sincro" sirve para sincronizar a
+          todos contigo.
+        </p>
+        <div class="form-group">
+          <label for="nombreUsuario">Nombre</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nombreUsuario"
+            autocomplete="off"
+          />
+          <small id="nailHelp" class="form-text"
+            >Sin espacios y menos de 10 caracteres.</small
+          >
+        </div>
+        <div class="form-group">
+          <label for="colorUsuario">Color burbuja</label>
+          <select class="form-control" id="colorUsuario">
+            <option
+              class="list-group-item list-group-item-primary"
+              value="list-group-item-primary"
+            >
+              Azul
+            </option>
+            <option
+              class="list-group-item list-group-item-success"
+              value="list-group-item-success"
+            >
+              Verde
+            </option>
+            <option
+              class="list-group-item list-group-item-danger"
+              value="list-group-item-danger"
+            >
+              Rojo
+            </option>
+            <option
+              class="list-group-item list-group-item-warning"
+              value="list-group-item-warning"
+            >
+              Amarillo
+            </option>
+            <option
+              class="list-group-item list-group-item-info"
+              value="list-group-item-info"
+            >
+              Cyan
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer border-0">
+        <button id="guardarUsuario" class="btn controls">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>

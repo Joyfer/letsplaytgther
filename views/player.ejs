@@ -6,14 +6,14 @@
   <div class="row">
     <div class="col-md-12 col-lg-8">
       <div class="card align-items-center">
-        <form class="form-inline mb-2" id="ola">
+        <form class="form-inline mb-2" id="buscarVideo">
           <input
             placeholder="URL de YT o busca un video"
             class="form-control"
             id="n"
             type="text"
             autocomplete="off"
-          /><button type="submit" class="btn controls loadua1 m-0">
+          /><button type="submit" class="btn controls loadua1 m-0" disabled>
             Buscar
           </button>
         </form>
@@ -24,21 +24,22 @@
             type="button"
             id="30segatras"
             value="atras"
+            disabled
           >
             ←
           </button>
-          <button class="btn controls" id="pause-vid">Pausa</button>
-          <button class="btn controls" id="play-vid">Play</button>
-          <button class="btn controls" id="30segadelante" value="adelante">
+          <button class="btn controls" id="pause-vid" disabled>Pausa</button>
+          <button class="btn controls" id="play-vid" disabled>Play</button>
+          <button class="btn controls" id="30segadelante" value="adelante" disabled>
             →
           </button>
         </div>
         <div class="row">
-          <button class="btn controls" type="button" id="reiniciar">
+          <button class="btn controls" type="button" id="reiniciar" disabled>
             Inicio</button
-          ><button class="btn controls" type="button" id="syncnow">
+          ><button class="btn controls" type="button" id="syncnow" disabled>
             Sincro</button
-          ><button class="btn controls" type="button" id="final">Final</button>
+          ><button class="btn controls" type="button" id="final" disabled>Final</button>
         </div>
       </div>
     </div>
@@ -59,14 +60,14 @@
                 required
               /><br /><button
                 class="btn controls mb-1 w-100 mx-0"
-                type="submit"
+                type="submit" id="send" disabled
               >
                 Enviar
               </button>
             </form>
             <button
             class="btn btn-danger my-1 w-100 border-none shadow-none"
-            id="reconect"
+            id="reconnect" disabled
           >
             Reconectar
           </button>

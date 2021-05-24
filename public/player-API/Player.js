@@ -5,8 +5,10 @@ class Usuarios {
     this.roomt = roomt;
   }
 }
-let Usuario;
-const socket = io();
+let Usuario,
+  reconnectButton = document.getElementById("reconnect");
+const controlsButtons = document.getElementsByClassName("controls"),
+  socket = io({ autoConnect: false, reconnection: false });
 // Conect function
 function connect(text) {
   socket.connect();
@@ -20,15 +22,13 @@ function connect(text) {
     Usuario.roomt
   );
 }
-socket.on("disconnect", (reason) => {
-  if (reason === "io server disconnect" || reason === "io client disconnect") {
-    // the disconnection was initiated by the server, you need to reconnect manually
-    connect("Se ha reconectado")
-  }
+socket.on("disconnect", () => {
+  // Si se desconecta, corre la función connect
+  connect("Se ha reconectado");
+  return;
 });
 // Modal -----------------------------
 $(window).on("load", function () {
-  let modal = document.getElementById("myModal");
   $("#myModal").modal("show");
   return;
 });
@@ -46,11 +46,20 @@ $("#guardarUsuario").click(function () {
       color == "list-group-item-info") &&
     nombreUsuario.length < 10
   ) {
+    //Si se cumplen las condiciones para crear usuario
+    //Creación de objeto Usuario
     Usuario = new Usuarios(color, nombreUsuario, salita);
+    //Se oculta el modal
     $("#myModal").modal("hide");
+    //Se conecta al SOcket y a la room
     connect("Se ha conectado");
+    //Se activan los botones del chat
+    reconnectButton.removeAttribute("disabled");
+    for (el of controlsButtons) el.removeAttribute("disabled");
   } else if (nombreUsuario.length >= 10) {
     crearAlerta("Nombre muy largo");
+  } else {
+    crearAlerta("Error");
   }
   return;
 });
@@ -73,7 +82,7 @@ function crearAlerta(errorA) {
   }, 5000);
   return (alertaDiv = ""), (objDiv = "");
 }
-// Play and pause controlls
+// Controles del reproductor
 function playVideo() {
   player.playVideo();
   return;
@@ -114,10 +123,12 @@ function controles(e) {
   evento = "";
   return;
 }
+// Funciones del chat
 function enviarMensaje(event) {
   event.preventDefault(); // prevents page reloading
   let msg = document.getElementById("mensajeChat").value;
   if (msg.length < 150) {
+    console.log(socket.connected);
     socket.emit(
       "chat message",
       msg,
@@ -178,7 +189,6 @@ const searchVideoYT = async (videoNombre) => {
       }
     }
   } catch (error) {
-    console.log(error);
     crearAlerta("Lo siento, no podemos buscar, pon la url.");
   }
   return;
@@ -214,11 +224,10 @@ function PonerVideoYoutube(value) {
 // Poner video de lista de Youtube ------------
 div.addEventListener("click", PonerVideoYoutube);
 // ---------------------------------------------------
-document.getElementById("ola").addEventListener("submit", buscarVideo);
-const amor = document.getElementsByClassName("controls");
-for (let el of amor) el.addEventListener("click", controles);
+document.getElementById("buscarVideo").addEventListener("submit", buscarVideo);
+for (let el of controlsButtons) el.addEventListener("click", controles);
 document.getElementById("chat").addEventListener("submit", enviarMensaje);
-document.getElementById("reconect").addEventListener("click", () => {
+reconnectButton.addEventListener("click", () => {
   connect("Se ha reconectado");
 });
 // Sockets ----------------------------------------------
