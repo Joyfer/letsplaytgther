@@ -10,7 +10,8 @@
 
 body {
   color: white;
-  background: url(../img/Sky-with-Night-Landscape-Vector.jpg) center no-repeat fixed;
+  background: url(../img/Sky-with-Night-Landscape-Vector.jpg) center no-repeat
+    fixed;
   background-size: contain;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -38,7 +39,7 @@ h1 {
   font-family: "Fresh-Lychee";
   font-size: 75px;
   text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.23);
-  color:rgb(255, 139, 44);
+  color: rgb(255, 139, 44);
 }
 
 .form-group {
@@ -53,7 +54,7 @@ label {
   font-size: 1em;
 }
 
-#nai{
+#nai {
   color: black;
 }
 
@@ -85,7 +86,7 @@ small {
   background-color: rgb(51, 163, 228);
 }
 
-.about{
+.about {
   font-size: 30px;
   width: 50px;
   height: 50px;
@@ -93,31 +94,31 @@ small {
   position: fixed;
   bottom: 30px;
   right: 30px;
-  background-color:rgb(255, 139, 44) ;
+  background-color: rgb(255, 139, 44);
 }
 
-.about:hover{
-  background-color:rgb(255, 162, 86) ;
+.about:hover {
+  background-color: rgb(255, 162, 86);
 }
 
-.modal-content{
+.modal-content {
   background-color: #222;
   color: white;
 }
 
-h3{
+h3 {
   margin-bottom: 3%;
   margin-top: -2%;
 }
 
-.btn:focus{
+.btn:focus {
   -webkit-box-shadow: 2px 2px 2px 0px rgba(16, 16, 16, 0.27);
   -moz-box-shadow: 2px 2px 2px 0px rgba(16, 16, 16, 0.27);
   box-shadow: 2px 2px 2px 0px rgba(16, 16, 16, 0.27);
 }
 
-.alert{
-  position:fixed;
+.alert {
+  position: fixed;
   top: 20px;
   width: 300px;
   height: 50px;
@@ -127,12 +128,12 @@ h3{
   margin-left: auto;
 }
 
-a{
+a {
   color: white;
   text-decoration: none;
 }
 
-a:hover{
+a:hover {
   color: rgb(255, 139, 44);
   text-decoration: none;
 }

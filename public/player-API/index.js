@@ -23,7 +23,7 @@ $(".about").on("click", function () {
 });
 //Crear la sala
 document.getElementById("linki").addEventListener("click", function (e) {
-  let sala = document.getElementById("nai").value;
+  let sala = document.getElementById("linkInput").value;
   sala = sala.replace(/\s/g, "");
   sala = sala.replace(/[^\w\s]/gi, "");
   if (sala != "" && sala.length < 10) {

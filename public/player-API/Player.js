@@ -13,7 +13,6 @@ const controlsButtons = document.getElementsByClassName("controls"),
 function connect(text) {
   socket.connect();
   socket.emit("join", Usuario.roomt);
-  $("#myModal").modal("hide");
   socket.emit(
     "chat message",
     `${text}`,
@@ -46,7 +45,7 @@ $("#guardarUsuario").click(function () {
       color == "list-group-item-info") &&
     nombreUsuario.length < 10
   ) {
-    //Si se cumplen las condiciones para crear usuario
+    //Si se cumplen las condiciones para crear un usuario
     //Creación de objeto Usuario
     Usuario = new Usuarios(color, nombreUsuario, salita);
     //Se oculta el modal
@@ -80,7 +79,7 @@ function crearAlerta(errorA) {
   setTimeout(function () {
     $('[role="alert"]').alert("close");
   }, 5000);
-  return (alertaDiv = ""), (objDiv = "");
+  return (alertaDiv = "", objDiv = "");
 }
 // Controles del reproductor
 function playVideo() {
@@ -102,8 +101,7 @@ function seekTo(amigo) {
   return;
 }
 function controles(e) {
-  let evento = e.target.getAttribute("id");
-  switch (evento) {
+  switch (e.target.getAttribute("id")) {
     case "play-vid":
       socket.emit("play-player", Usuario.roomt);
       break;
@@ -120,23 +118,21 @@ function controles(e) {
       socket.emit("min-player", Usuario.roomt, inicio, evento, duration);
       break;
   }
-  evento = "";
   return;
 }
 // Funciones del chat
 function enviarMensaje(event) {
   event.preventDefault(); // prevents page reloading
-  let msg = document.getElementById("mensajeChat").value;
-  if (msg.length < 150) {
-    console.log(socket.connected);
+  let msg = document.getElementById("mensajeChat");
+  if (msg.value.length < 150) {
     socket.emit(
       "chat message",
-      msg,
+      msg.value,
       Usuario.color,
       Usuario.nombreUser,
       Usuario.roomt
     );
-    document.getElementById("mensajeChat").value = "";
+    msg.value = "";
   } else {
     crearAlerta("Mensaje muy largo");
   }
@@ -195,13 +191,13 @@ const searchVideoYT = async (videoNombre) => {
 };
 const buscarVideo = (event) => {
   event.preventDefault();
-  let url = document.getElementById("n").value;
-  if (url == "") {
+  let url = document.getElementById("searchInput");
+  if (url.value == "") {
     crearAlerta("Por favor coloque algo.");
   } else {
-    searchVideoYT(url);
+    searchVideoYT(url.value);
   }
-  return (document.getElementById("n").value = ""), (url = "");
+  return (url.value = "");
 };
 function nuevoVidMsg() {
   socket.emit(

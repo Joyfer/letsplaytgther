@@ -1,8 +1,6 @@
-<%- include ('template/cabecera', {tituloweb: 'Player'}); %>
+<%- include ('template/cabecera', {tituloweb: `Player || ${roomy}`}); %>
 <link rel="stylesheet" href="/css/player.css" />
-<!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-<div class="mt-2 d-none d-sm-none d-md-block"></div>
-<div class="container mb-2">
+<div class="container my-2">
   <div class="row">
     <div class="col-md-12 col-lg-8">
       <div class="card align-items-center">
@@ -10,10 +8,10 @@
           <input
             placeholder="URL de YT o busca un video"
             class="form-control"
-            id="n"
+            id="searchInput"
             type="text"
             autocomplete="off"
-          /><button type="submit" class="btn controls loadua1 m-0" disabled>
+          /><button type="submit" class="btn controls m-0 rounded-0" disabled>
             Buscar
           </button>
         </form>
@@ -30,7 +28,12 @@
           </button>
           <button class="btn controls" id="pause-vid" disabled>Pausa</button>
           <button class="btn controls" id="play-vid" disabled>Play</button>
-          <button class="btn controls" id="30segadelante" value="adelante" disabled>
+          <button
+            class="btn controls"
+            id="30segadelante"
+            value="adelante"
+            disabled
+          >
             →
           </button>
         </div>
@@ -39,7 +42,9 @@
             Inicio</button
           ><button class="btn controls" type="button" id="syncnow" disabled>
             Sincro</button
-          ><button class="btn controls" type="button" id="final" disabled>Final</button>
+          ><button class="btn controls" type="button" id="final" disabled>
+            Final
+          </button>
         </div>
       </div>
     </div>
@@ -51,7 +56,7 @@
             <li class="list-group-item-secondary">¡Bienvenid@!</li>
           </ul>
           <div class="card-body text-center">
-            <form id="chat" class="chateo mt-3">
+            <form id="chat" class="mt-3">
               <input
                 class="form-control"
                 type="text"
@@ -60,127 +65,28 @@
                 required
               /><br /><button
                 class="btn controls mb-1 w-100 mx-0"
-                type="submit" id="send" disabled
+                type="submit"
+                id="send"
+                disabled
               >
                 Enviar
               </button>
             </form>
             <button
-            class="btn btn-danger my-1 w-100 border-none shadow-none"
-            id="reconnect" disabled
-          >
-            Reconectar
-          </button>
+              class="btn btn-danger my-1 w-100 border-none shadow-none"
+              id="reconnect"
+              disabled
+            >
+              Reconectar
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<!-- Modal -->
-<div
-  class="modal hide fade"
-  id="myModal"
-  data-backdrop="static"
-  data-keyboard="false"
-  tabindex="-1"
-  aria-labelledby="staticBackdropLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header border-0">
-        <h3 class="modal-title" id="staticBackdropLabel">Sala: <%= roomy %></h3>
-      </div>
-      <div class="modal-body">
-        <p>
-          Usa los botones de abajo, si usas el reproductor puedes
-          desincronizarte con los demás. Espera a que todos estén dentro para
-          empezar a poner los videos. El botón "Sincro" sirve para sincronizar a
-          todos contigo.
-        </p>
-        <div class="form-group">
-          <label for="nombreUsuario">Nombre</label>
-          <input
-            type="text"
-            class="form-control"
-            id="nombreUsuario"
-            autocomplete="off"
-          />
-          <small id="nailHelp" class="form-text"
-            >Sin espacios y menos de 10 caracteres.</small
-          >
-        </div>
-        <div class="form-group">
-          <label for="colorUsuario">Color burbuja</label>
-          <select class="form-control" id="colorUsuario">
-            <option
-              class="list-group-item list-group-item-primary"
-              value="list-group-item-primary"
-            >
-              Azul
-            </option>
-            <option
-              class="list-group-item list-group-item-success"
-              value="list-group-item-success"
-            >
-              Verde
-            </option>
-            <option
-              class="list-group-item list-group-item-danger"
-              value="list-group-item-danger"
-            >
-              Rojo
-            </option>
-            <option
-              class="list-group-item list-group-item-warning"
-              value="list-group-item-warning"
-            >
-              Amarillo
-            </option>
-            <option
-              class="list-group-item list-group-item-info"
-              value="list-group-item-info"
-            >
-              Cyan
-            </option>
-          </select>
-        </div>
-      </div>
-      <div class="modal-footer border-0">
-        <button id="guardarUsuario" class="btn controls">Aceptar</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Search modal -->
-<div
-  class="modal hide fade"
-  id="modalSearches"
-  tabindex="-1"
-  aria-labelledby="staticBackdropLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header border-0">
-        <h3 class="modal-title" id="staticBackdropLabel">Lista de videos</h3>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Da clic en el botón amarillo para poner un video.</p>
-        <ul class="list-group" id="lista"></ul>
-      </div>
-    </div>
-  </div>
-</div>
+<%- include ('modals/modalWelcome', {sala: roomy}); %> <%- include
+('modals/modalSearches'); %>
 <script>
   const salita = "<%= roomy %>";
 </script>

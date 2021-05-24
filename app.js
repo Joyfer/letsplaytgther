@@ -11,9 +11,6 @@ app.use(express.static(__dirname + "/public"));
 app.get("/", (req, res) => {
   res.render("index");
 });
-
-app.use("/chat", require("./router/chat"));
-
 //   ----------- Video ----------
 app.use("/player", require("./router/player"));
 
@@ -27,8 +24,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("url-player", (url, roomt) => {
-    let indexurl;
-    let indexurlE;
+    let indexurl, indexurlE;
     if (url.includes("=") && url.includes("/")) {
       indexurl = url.indexOf("=");
       url = url.substring(indexurl + 1);
@@ -70,7 +66,6 @@ io.on("connection", (socket) => {
     io.to(roomt).emit("chat message", mensaje, color);
   });
 });
-
 //   ----------- Video ----------
 http.listen(PORT, () => {
   console.log("listening on *:3000");
