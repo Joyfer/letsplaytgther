@@ -101,7 +101,8 @@ function seekTo(amigo) {
   return;
 }
 function controles(e) {
-  switch (e.target.getAttribute("id")) {
+  let evento = e.target.getAttribute("id");
+  switch (evento) {
     case "play-vid":
       socket.emit("play-player", Usuario.roomt);
       break;
